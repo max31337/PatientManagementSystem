@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Patient Dashboard";
+    Layout = "_Layout";
+}
+
+<div class="container mx-auto px-4 py-6">
+    <h2 class="text-3xl font-bold text-apple-green mb-4">Patient Dashboard</h2>
+    <p class="text-lg text-gray-700 mb-6">Welcome to the Patient Management System! Here you can manage patient records, payments, and more.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white shadow-md rounded-lg p-6 transition duration-300 transform hover:scale-105 cursor-pointer" onclick="navigateTo('PatientList')">
+            <h3 class="text-xl font-semibold text-stromboli mb-2">View Patient List</h3>
+            <p class="text-gray-600">Access the list of all registered patients.</p>
+        </div>
+        <div class="bg-white shadow-md rounded-lg p-6 transition duration-300 transform hover:scale-105 cursor-pointer" onclick="navigateTo('CreatePatient')">
+            <h3 class="text-xl font-semibold text-stromboli mb-2">Add New Patient</h3>
+            <p class="text-gray-600">Register a new patient into the system.</p>
+        </div>
+        <div class="bg-white shadow-md rounded-lg p-6 transition duration-300 transform hover:scale-105 cursor-pointer" onclick="navigateTo('ManagePayments')">
+            <h3 class="text-xl font-semibold text-stromboli mb-2">Manage Payments</h3>
+            <p class="text-gray-600">View and manage patient payment records.</p>
+        </div>
+        <div class="bg-white shadow-md rounded-lg p-6 transition duration-300 transform hover:scale-105 cursor-pointer" onclick="navigateTo('ViewMedicalRecords')">
+            <h3 class="text-xl font-semibold text-stromboli mb-2">View Medical Records</h3>
+            <p class="text-gray-600">Access and manage patients' medical records.</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function navigateTo(feature) {
+            switch (feature) {
+                case 'PatientList':
+                    window.location.href = '@Url.Action("Index", "Patient")';
+                    break;
+                case 'CreatePatient':
+                    window.location.href = '@Url.Action("Create", "Patient")';
+                    break;
+                case 'ManagePayments':
+                    window.location.href = '@Url.Action("Index", "Payment")';
+                    break;
+                case 'ViewMedicalRecords':
+                    window.location.href = '@Url.Action("Index", "MedicalRecord")';
+                    break;
+                default:
+                    break;
+            }
+        }
+    </script>
+}

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Payment>
+
+<div class="container mx-auto px-4 py-6">
+    <h2 class="text-3xl font-bold text-apple-green mb-4">Payments</h2>
+    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+        <thead class="bg-downy">
+            <tr class="text-gray-700">
+                <th class="py-3 px-4 text-left">Patient ID</th>
+                <th class="py-3 px-4 text-left">Amount</th>
+                <th class="py-3 px-4 text-left">Payment Date</th>
+                <th class="py-3 px-4 text-left">Paid Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model == null || !Model.Any())
+            {
+                <tr>
+                    <td colspan="4" class="text-center py-4">No payment records available.</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var payment in Model)
+                {
+                    <tr class="border-b hover:bg-gray-100">
+                        <td class="py-2 px-4">@payment.PatientId</td>
+                        <td class="py-2 px-4">@payment.Amount.ToString("C")</td>
+                        <td class="py-2 px-4">@payment.PaymentDate.ToShortDateString()</td>
+                        <td class="py-2 px-4">@((payment.IsPaid) ? "Paid" : "Unpaid")</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
