@@ -1,0 +1,73 @@
+﻿@{
+    var hideSidebar = ViewData["HideSidebar"] as bool? ?? false;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Patient Management System</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+    <script src="~/js/tailwind-config.js"></script>
+
+    <style>
+        .bg-apple-green {
+            background-color: #8db600;
+        }
+
+        .bg-downy {
+            background-color: #f0f4f8;
+        }
+
+        .bg-stromboli {
+            background-color: #4b8b77;
+        }
+
+        .bg-edward {
+            background-color: #1d4e89;
+        }
+    </style>
+</head>
+<body class="bg-downy">
+
+    <div class="flex">
+        @if (!hideSidebar)
+        {
+            <aside class="w-64 bg-apple-green shadow-md h-screen p-4">
+                <h1 class="text-lg font-bold mb-4 text-white">Patient Management System</h1>
+                <nav>
+                    <ul>
+                        <li class="mb-2">
+                            <a href="@Url.Action("Create", "Patient")" class="text-stromboli hover:text-white">Patient Registration</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="@Url.Action("Index", "Patient")" class="text-stromboli hover:text-white">Patient Records</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="@Url.Action("Index", "Payment")" class="text-stromboli hover:text-white">Patient Payments</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="@Url.Action("Index", "MedicalRecord")" class="text-stromboli hover:text-white">Electronic Medical Records</a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+        }
+
+        <main class="flex-1 p-4">
+            <div class="container mx-auto">
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+
+    <footer class="bg-stromboli text-center p-4 shadow-md">
+        <p class="text-white">&copy; @DateTime.Now.Year - Patient Management System</p>
+    </footer>
+
+    <!-- Render Scripts Section -->
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<MedicalRecord>
+
+<div class="container mx-auto px-4 py-6">
+    <h2 class="text-3xl font-bold text-apple-green mb-4">Medical Records</h2>
+    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+        <thead class="bg-downy">
+            <tr class="text-gray-700">
+                <th class="py-3 px-4 text-left">Patient ID</th>
+                <th class="py-3 px-4 text-left">Record Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model == null || !Model.Any())
+            {
+                <tr>
+                    <td colspan="2" class="text-center py-4">No medical records available.</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var record in Model)
+                {
+                    <tr class="border-b hover:bg-gray-100">
+                        <td class="py-2 px-4">@record.PatientId</td>
+                        <td class="py-2 px-4">@record.RecordDetails</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
