@@ -6,7 +6,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Patient> Patients { get; set; }
     public DbSet<Payment> Payments { get; set; }
     public DbSet<MedicalRecord> MedicalRecords { get; set; }
-    public DbSet<User> Users { get; set; } // Add your custom User entity here
+    public DbSet<User> Users { get; set; } // I tried using Identity but I think it is overkil, will be using it when the need arise
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)

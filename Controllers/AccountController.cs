@@ -2,6 +2,7 @@
 using PatientManagementSystem.ViewModels;
 using System.Threading.Tasks;
 
+//I'll add the function for checking Users from other subsystems later
 public class AccountController : Controller
 {
     private readonly ApplicationDbContext _context;
@@ -20,7 +21,7 @@ public class AccountController : Controller
     {
         if (ModelState.IsValid)
         {
-            // Validate user credentials against your database
+            // Validate user credentials against the database
             var user = _context.Users.FirstOrDefault(u => u.Username == model.Username && u.Password == model.Password); // Adjust as needed
 
             if (user != null)
