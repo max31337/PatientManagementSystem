@@ -1,7 +1,7 @@
 ﻿@model PatientManagementSystem.Models.Patient
 
 <div class="container mx-auto px-4 py-6">
-    <h2 class="text-3xl font-bold text-apple-green mb-4">Create Patient</h2>
+    <h2 class="text-3xl font-bold text-applegreen mb-4">Create Patient</h2>
     <form asp-action="Create" method="post" class="bg-white shadow-md rounded-lg p-6">
         <div class="mb-4">
             <label asp-for="FullName" class="block text-sm font-medium text-gray-700"></label>
@@ -23,7 +23,7 @@
             <textarea asp-for="MedicalRecord" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows="4"></textarea>
             <span asp-validation-for="MedicalRecord" class="text-red-500 text-sm"></span>
         </div>
-        <button type="submit" class="bg-downy text-white font-semibold py-2 px-4 rounded-md hover:bg-stromboli">Create</button>
+        <button type="submit" class="bg-stromboli text-white font-semibold py-2 px-4 rounded-md hover:bg-stromboli">Create</button>
         @Html.AntiForgeryToken()
     </form>
 </div>

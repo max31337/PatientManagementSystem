@@ -2,12 +2,12 @@
 @{
     ViewData["Title"] = "Register";
     ViewData["HideSidebar"] = true; 
-    Layout = "~/Views/Shared/_Layout.cshtml"; 
+    Layout = "_Layout";
 
 }
 
 <div class="container mx-auto px-4 py-6">
-    <h2 class="text-3xl font-bold text-apple-green mb-6">Register</h2>
+    <h2 class="text-3xl font-bold text-applegreen mb-6">Register</h2>
 
     <form asp-action="Register" method="post" class="bg-white shadow-md rounded-lg p-6">
         <div class="mb-4">
@@ -41,7 +41,7 @@
             </select>
             <span asp-validation-for="UserRole" class="text-red-500 text-sm"></span>
         </div>
-        <button type="submit" class="bg-edward text-gray-700 font-semibold py-2 px-4 rounded hover:bg-stromboli transition duration-300">Register</button>
+        <button type="submit" class="bg-stromboli text-gray-700 font-semibold py-2 px-4 rounded hover:bg-stromboli transition duration-300">Register</button>
     </form>
 </div>
 

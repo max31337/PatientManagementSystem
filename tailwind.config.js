@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
-        "./Views/**/*.{cshtml,html}",
+        "./Views/**/.{cshtml,html}",
         "./wwwroot/**/*.{html,js}",
     ],
     theme: {
@@ -10,7 +10,9 @@ module.exports = {
                 stromboli: '#426A5A',
                 downy: '#6FCF97',
                 edward: '#A9BDBA',
-                appleGreen: '#71B340',
+                applegreen: '#71B340',
+                seafoamgreen: '#93E9BE',
+}
             },
             fontFamily: {
                 sans: ['Nunito', 'Inter', 'sans-serif'],

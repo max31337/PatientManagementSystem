@@ -7,35 +7,34 @@
     var userRole = HttpContextAccessor.HttpContext?.Session.GetString("UserRole");
 }
 
-<aside class="w-64 bg-apple-green shadow-md h-screen p-4">
-    <h1 class="text-lg font-bold mb-4 text-white">Patient Management System</h1>
-    <nav>
+<aside class="w-64 bg-downy-200 shadow-md h-screen p-4 flex flex-col">
+    <nav class="flex-1">
         <ul>
             <li class="mb-2">
-                <a href="/Patient/Create" class="text-stromboli hover:text-white">Patient Registration</a>
+                <a href="/Patient/Create" class="bg-stromboli text-white font-semibold py-2 px-4 rounded block hover:bg-applegreen transition duration-300">Patient Registration</a>
             </li>
             <li class="mb-2">
-                <a href="/Patient" class="text-stromboli hover:text-white">Patient Records</a>
+                <a href="/Patient" class="bg-stromboli text-white font-semibold py-2 px-4 rounded block hover:bg-applegreen transition duration-300">Patient Records</a>
             </li>
             <li class="mb-2">
-                <a href="/Payment" class="text-stromboli hover:text-white">Patient Payments</a>
+                <a href="/Payment" class="bg-stromboli text-white font-semibold py-2 px-4 rounded block hover:bg-applegreen transition duration-300">Patient Payments</a>
             </li>
             <li class="mb-2">
-                <a href="/MedicalRecord" class="text-stromboli hover:text-white">Electronic Medical Records</a>
+                <a href="/MedicalRecord" class="bg-stromboli text-white font-semibold py-2 px-4 rounded block hover:bg-applegreen transition duration-300">Electronic Medical Records</a>
             </li>
         </ul>
-
-        <!-- Logout Button and User Info -->
-        <div class="mt-4 flex items-center justify-between">
-            <div class="text-white">
-                <span class="font-semibold">@username</span><br />
-                <span class="text-sm">@userRole</span>
-            </div>
-            <form method="post" action="/Account/Logout" class="inline">
-                <button type="submit" class="bg-edward text-white font-semibold py-2 px-4 rounded hover:bg-stromboli transition duration-300">
-                    Logout
-                </button>
-            </form>
-        </div>
     </nav>
+
+    <!-- Logout Button and User Info at the bottom -->
+    <div class="mt-auto flex items-center justify-between">
+        <div class="text-black">
+            <span class="font-semibold">@username</span><br />
+            <span class="text-sm">@userRole</span>
+        </div>
+        <form method="post" action="/Account/Logout" class="inline">
+            <button type="submit" class="bg-stromboli text-white font-semibold py-2 px-4 rounded hover:bg-stromboli transition duration-300">
+                Logout
+            </button>
+        </form>
+    </div>
 </aside>

@@ -2,6 +2,7 @@
 
 @{
     var hideSidebar = ViewData["HideSidebar"] as bool? ?? false;
+    var hideHeaderFooter = ViewData["HideHeaderFooter"] as bool? ?? false; // Check for hide header/footer
 }
 
 <!DOCTYPE html>
@@ -15,8 +16,12 @@
     <script src="~/js/tailwind-config.js"></script>
 
     <style>
-        .bg-apple-green {
+        .bg-applegreen {
             background-color: #8db600;
+        }
+
+        .bg-seafoamgreen {
+            background-color: #93E9BE;
         }
 
         .bg-downy {
@@ -30,9 +35,28 @@
         .bg-edward {
             background-color: #1d4e89;
         }
+
+        /* Ensures full height for the body and html elements */
+        html, body {
+            position: relative;
+        }
+
+        /* Ensures the footer is always at the bottom */
+        footer {
+            position: relative;
+        }
     </style>
 </head>
 <body class="bg-downy">
+
+    @if (!hideHeaderFooter) // Render header if not hidden
+    {
+        <header class="bg-stromboli p-4 shadow-md flex items-center">
+            <!-- Red Circle Logo Placeholder -->
+            <div class="w-9 h-9 bg-red-500 rounded-full mr-4"></div>
+            <h1 class="text-white text-s font-bold">Patient Management System</h1>
+        </header>
+    }
 
     <div class="flex">
         @if (!hideSidebar)
@@ -48,9 +72,12 @@
         </main>
     </div>
 
-    <footer class="bg-stromboli text-center p-4 shadow-md">
-        <p class="text-white">&copy; @DateTime.Now.Year - Patient Management System</p>
-    </footer>
+    @if (!hideHeaderFooter) // Render footer if not hidden
+    {
+        <footer class="bg-stromboli text-center p-4 shadow-md">
+            <p class="text-white">&copy; @DateTime.Now.Year - Patient Management System</p>
+        </footer>
+    }
 
     <!-- Render Scripts Section -->
     @RenderSection("Scripts", required: false)
