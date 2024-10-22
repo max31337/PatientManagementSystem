@@ -17,5 +17,9 @@ namespace PatientManagementSystem.ViewModels
 
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "User role is required.")]
+        public UserRole UserRole { get; set; }
+
     }
 }

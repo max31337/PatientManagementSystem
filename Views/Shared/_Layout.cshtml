@@ -1,4 +1,6 @@
-﻿@{
+﻿@inject IHttpContextAccessor HttpContextAccessor
+
+@{
     var hideSidebar = ViewData["HideSidebar"] as bool? ?? false;
 }
 
@@ -35,25 +37,8 @@
     <div class="flex">
         @if (!hideSidebar)
         {
-            <aside class="w-64 bg-apple-green shadow-md h-screen p-4">
-                <h1 class="text-lg font-bold mb-4 text-white">Patient Management System</h1>
-                <nav>
-                    <ul>
-                        <li class="mb-2">
-                            <a href="@Url.Action("Create", "Patient")" class="text-stromboli hover:text-white">Patient Registration</a>
-                        </li>
-                        <li class="mb-2">
-                            <a href="@Url.Action("Index", "Patient")" class="text-stromboli hover:text-white">Patient Records</a>
-                        </li>
-                        <li class="mb-2">
-                            <a href="@Url.Action("Index", "Payment")" class="text-stromboli hover:text-white">Patient Payments</a>
-                        </li>
-                        <li class="mb-2">
-                            <a href="@Url.Action("Index", "MedicalRecord")" class="text-stromboli hover:text-white">Electronic Medical Records</a>
-                        </li>
-                    </ul>
-                </nav>
-            </aside>
+            @await Html.PartialAsync("_Sidebar")
+            // Render the sidebar if not hidden
         }
 
         <main class="flex-1 p-4">
