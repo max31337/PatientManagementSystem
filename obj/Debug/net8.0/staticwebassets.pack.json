@@ -5,8 +5,8 @@
       "PackagePath": "staticwebassets\\PatientManagementSystem.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\css\\site.css",
-      "PackagePath": "staticwebassets\\css\\site.css"
+      "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\css\\output.css",
+      "PackagePath": "staticwebassets\\css\\output.css"
     },
     {
       "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\favicon.ico",

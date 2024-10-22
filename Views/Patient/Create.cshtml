@@ -1,29 +1,33 @@
 ﻿@model PatientManagementSystem.Models.Patient
 
 <div class="container mx-auto px-4 py-6">
-    <h2 class="text-3xl font-bold text-applegreen mb-4">Create Patient</h2>
-    <form asp-action="Create" method="post" class="bg-white shadow-md rounded-lg p-6">
-        <div class="mb-4">
-            <label asp-for="FullName" class="block text-sm font-medium text-gray-700"></label>
-            <input asp-for="FullName" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
-            <span asp-validation-for="FullName" class="text-red-500 text-sm"></span>
+    <h2 class="text-3xl font-bold text-stromboli mb-4">Create Patient</h2>
+    <form asp-action="Create" method="post" class="bg-white shadow-md rounded-lg p-6 max-w-3xl mx-auto">
+        <!-- Set a max width -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Use grid layout -->
+            <div class="mb-4">
+                <label asp-for="FullName" class="block text-sm font-medium text-gray-700"></label>
+                <input asp-for="FullName" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+                <span asp-validation-for="FullName" class="text-red-500 text-sm"></span>
+            </div>
+            <div class="mb-4">
+                <label asp-for="DateOfBirth" class="block text-sm font-medium text-gray-700"></label>
+                <input asp-for="DateOfBirth" type="date" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+                <span asp-validation-for="DateOfBirth" class="text-red-500 text-sm"></span>
+            </div>
+            <div class="mb-4">
+                <label asp-for="Address" class="block text-sm font-medium text-gray-700"></label>
+                <input asp-for="Address" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+                <span asp-validation-for="Address" class="text-red-500 text-sm"></span>
+            </div>
+            <div class="mb-4">
+                <label asp-for="MedicalRecord" class="block text-sm font-medium text-gray-700"></label>
+                <textarea asp-for="MedicalRecord" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows="2"></textarea> <!-- Reduced rows -->
+                <span asp-validation-for="MedicalRecord" class="text-red-500 text-sm"></span>
+            </div>
         </div>
-        <div class="mb-4">
-            <label asp-for="DateOfBirth" class="block text-sm font-medium text-gray-700"></label>
-            <input asp-for="DateOfBirth" type="date" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
-            <span asp-validation-for="DateOfBirth" class="text-red-500 text-sm"></span>
-        </div>
-        <div class="mb-4">
-            <label asp-for="Address" class="block text-sm font-medium text-gray-700"></label>
-            <input asp-for="Address" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
-            <span asp-validation-for="Address" class="text-red-500 text-sm"></span>
-        </div>
-        <div class="mb-4">
-            <label asp-for="MedicalRecord" class="block text-sm font-medium text-gray-700"></label>
-            <textarea asp-for="MedicalRecord" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows="4"></textarea>
-            <span asp-validation-for="MedicalRecord" class="text-red-500 text-sm"></span>
-        </div>
-        <button type="submit" class="bg-stromboli text-white font-semibold py-2 px-4 rounded-md hover:bg-stromboli">Create</button>
+        <button type="submit" class="bg-stromboli text-white font-semibold py-2 px-4 rounded-md hover:bg-stromboli mt-4">Create</button>
         @Html.AntiForgeryToken()
     </form>
 </div>

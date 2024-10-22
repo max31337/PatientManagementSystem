@@ -1,23 +1,21 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
-        "./Views/**/.{cshtml,html}",
+        "./Views/**/*.{cshtml,js}",
         "./wwwroot/**/*.{html,js}",
     ],
+
     theme: {
         extend: {
             colors: {
-                stromboli: '#426A5A',
-                downy: '#6FCF97',
-                edward: '#A9BDBA',
-                applegreen: '#71B340',
-                seafoamgreen: '#93E9BE',
-}
+                stromboli: '#366857',
+                downy: '#6eccac',
+                edward: '#abb7b4',
+                seafoamgreen: '#93e9be',
+                applegreen: '#def2ed',
             },
             fontFamily: {
                 sans: ['Nunito', 'Inter', 'sans-serif'],
             },
         },
     },
-    plugins: [],
 };

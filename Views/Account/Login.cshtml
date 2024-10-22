@@ -5,27 +5,29 @@
     Layout = "_Layout";
 }
 
-
-<div class="container mx-auto px-4 py-6">
-    <h2 class="text-2xl font-bold text-applegreen mb-6">Login</h2>
-    <form asp-action="Login" method="post" class="bg-white shadow-md rounded-lg p-6">
-        <div class="mb-4">
-            <label asp-for="Username" class="block text-gray-700 font-semibold mb-2"></label>
-            <input asp-for="Username" required class="border border-gray-300 p-2 w-full rounded" />
-            <span asp-validation-for="Username" class="text-red-500 text-sm"></span>
-        </div>
-        <div class="mb-4">
-            <label asp-for="Password" class="block text-gray-700 font-semibold mb-2"></label>
-            <input asp-for="Password" type="password" required class="border border-gray-300 p-2 w-full rounded" />
-            <span asp-validation-for="Password" class="text-red-500 text-sm"></span>
-        </div>
-        <div class="flex items-center mb-4">
-            <input asp-for="RememberMe" type="checkbox" class="mr-2" />
-            <label for="RememberMe" class="text-gray-700">Remember Me</label>
-            <span asp-validation-for="RememberMe" class="text-red-500 text-sm"></span>
-        </div>
-        <button type="submit" class="bg-stromboli text-white font-semibold py-2 px-4 rounded hover:bg-stromboli transition duration-300">Login</button>
-    </form>
+<div class="flex items-center justify-center min-h-[calc(100vh-128px)] bg-gray-100">
+    <!-- Adjust height for header/footer -->
+    <div class="bg-white shadow-lg rounded-lg p-8 w-96">
+        <h2 class="text-2xl font-bold text-applegreen mb-6 text-center">Login</h2>
+        <form asp-action="Login" method="post" class="space-y-4">
+            <div>
+                <label asp-for="Username" class="block text-gray-700 font-semibold mb-2"></label>
+                <input asp-for="Username" required class="border border-gray-300 p-2 w-full rounded-md focus:outline-none focus:ring focus:ring-blue-500" />
+                <span asp-validation-for="Username" class="text-red-500 text-sm"></span>
+            </div>
+            <div>
+                <label asp-for="Password" class="block text-gray-700 font-semibold mb-2"></label>
+                <input asp-for="Password" type="password" required class="border border-gray-300 p-2 w-full rounded-md focus:outline-none focus:ring focus:ring-blue-500" />
+                <span asp-validation-for="Password" class="text-red-500 text-sm"></span>
+            </div>
+            <div class="flex items-center">
+                <input asp-for="RememberMe" type="checkbox" class="mr-2" />
+                <label asp-for="RememberMe" class="text-gray-700">Remember Me</label>
+                <span asp-validation-for="RememberMe" class="text-red-500 text-sm"></span>
+            </div>
+            <button type="submit" class="bg-downy text-white font-semibold py-2 px-4 rounded-md hover:bg-stromboli transition duration-300 w-full">Login</button>
+        </form>
+    </div>
 </div>
 
 @section Scripts {

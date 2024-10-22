@@ -7,32 +7,34 @@
     var userRole = HttpContextAccessor.HttpContext?.Session.GetString("UserRole");
 }
 
-<aside class="w-64 bg-downy-200 shadow-md h-screen p-4 flex flex-col">
+<<aside class="w-64 bg-downy-200 shadow-md h-500 flex flex-col"> <!-- Removed p-4 from here -->
     <nav class="flex-1">
-        <ul>
-            <li class="mb-2">
-                <a href="/Patient/Create" class="bg-stromboli text-white font-semibold py-2 px-4 rounded block hover:bg-applegreen transition duration-300">Patient Registration</a>
+        <ul class="space-y-0"> <!-- Use space-y-0 to eliminate vertical spacing -->
+            <li>
+                <a href="/Patient/Create" class="bg-applegreen text-stromboli font-semibold py-2 px-4 block hover:bg-downy hover:text-white transition duration-300 w-full text-center">Patient Registration</a>
             </li>
-            <li class="mb-2">
-                <a href="/Patient" class="bg-stromboli text-white font-semibold py-2 px-4 rounded block hover:bg-applegreen transition duration-300">Patient Records</a>
+            <li>
+                <a href="/Patient" class="bg-applegreen text-stromboli font-semibold py-2 px-4 block hover:bg-downy hover:text-white transition duration-300 w-full text-center">Patient Records</a>
             </li>
-            <li class="mb-2">
-                <a href="/Payment" class="bg-stromboli text-white font-semibold py-2 px-4 rounded block hover:bg-applegreen transition duration-300">Patient Payments</a>
+            <li>
+                <a href="/Payment" class="bg-applegreen text-stromboli font-semibold py-2 px-4 block hover:bg-downy hover:text-white transition duration-300 w-full text-center">Patient Payments</a>
             </li>
-            <li class="mb-2">
-                <a href="/MedicalRecord" class="bg-stromboli text-white font-semibold py-2 px-4 rounded block hover:bg-applegreen transition duration-300">Electronic Medical Records</a>
+            <li>
+                <a href="/MedicalRecord" class="bg-applegreen text-stromboli font-semibold py-2 px-4 block hover:bg-downy hover:text-white transition duration-300 w-full text-center">Electronic Medical Records</a>
             </li>
         </ul>
     </nav>
 
     <!-- Logout Button and User Info at the bottom -->
-    <div class="mt-auto flex items-center justify-between">
-        <div class="text-black">
+    <div class="flex items-center justify-between mt-4">
+        <!-- Adjusted margin to ensure it touches the footer -->
+        <div class="text-stromboli">
             <span class="font-semibold">@username</span><br />
             <span class="text-sm">@userRole</span>
         </div>
         <form method="post" action="/Account/Logout" class="inline">
-            <button type="submit" class="bg-stromboli text-white font-semibold py-2 px-4 rounded hover:bg-stromboli transition duration-300">
+            <button type="submit" class="bg-downy text-stromboli font-semibold py-2 px-4 rounded hover:bg-stromboli hover:text-white transition duration-300 w-full text-center">
+                <!-- Stretched button -->
                 Logout
             </button>
         </form>

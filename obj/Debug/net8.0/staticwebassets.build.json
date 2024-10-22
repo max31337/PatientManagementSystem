@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "s3EjyS5+yMTF76Baeu8CAYy+v54OMLsFuHl5rQfa3Mo=",
+  "Hash": "irv39OEsuC+hRL6WdDduSIXq9MxHB3KoF5Bnu6DDf2Y=",
   "Source": "PatientManagementSystem",
   "BasePath": "_content/PatientManagementSystem",
   "Mode": "Default",
@@ -55,12 +55,12 @@
       "OriginalItemSpec": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\PatientManagementSystem.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\css\\site.css",
+      "Identity": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\css\\output.css",
       "SourceId": "PatientManagementSystem",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\",
       "BasePath": "_content/PatientManagementSystem",
-      "RelativePath": "css/site.css",
+      "RelativePath": "css/output.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -71,7 +71,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\site.css"
+      "OriginalItemSpec": "wwwroot\\css\\output.css"
     },
     {
       "Identity": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\favicon.ico",
