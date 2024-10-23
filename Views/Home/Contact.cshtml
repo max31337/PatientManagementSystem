@@ -1,5 +1,51 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model PatientManagementSystem.ViewModels.ContactViewModel
+
 @{
+    ViewData["Title"] = "Contact Us Page";
+    ViewData["HideSidebar"] = true;
+    Layout = "_Layout";
+    }
+
+
+<div class="bg-white shadow-md rounded-lg p-4 mt-4">
+    <h4 class="text-xl font-semibold">Contact Us</h4>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="mb-4 text-green-500">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <form method="post" asp-action="Index">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-4">
+            <label asp-for="Name" class="block text-sm font-medium text-gray-700"></label>
+            <input asp-for="Name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required />
+            <span asp-validation-for="Name" class="text-red-500 text-sm"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Email" class="block text-sm font-medium text-gray-700"></label>
+            <input asp-for="Email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required />
+            <span asp-validation-for="Email" class="text-red-500 text-sm"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Message" class="block text-sm font-medium text-gray-700"></label>
+            <textarea asp-for="Message" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required></textarea>
+            <span asp-validation-for="Message" class="text-red-500 text-sm"></span>
+        </div>
+
+        <button type="submit" class="bg-stromboli text-white font-semibold py-2 px-4 rounded-md hover:bg-stromboli mt-4">
+            Send Message
+        </button>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
