@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PatientManagementSystem.Models;
 using PatientManagementSystem.ViewModels;
 
@@ -94,14 +95,23 @@ public class PatientController : Controller
                 Address = patient.Address,
             };
 
-            return View(viewModel); // Return the view with the existing details
+            return View(viewModel); 
         }
     }
 
     public async Task<IActionResult> Details(int id)
     {
-        var patient = await _context.Patients.FindAsync(id);
-        if (patient == null) return NotFound();
+        var patient = await _context.Patients
+            .Include(p => p.Payments) 
+            .Include(p => p.MedicalRecords) 
+            .FirstOrDefaultAsync(p => p.Id == id); 
+
+        if (patient == null)
+        {
+            return NotFound();
+        }
+
         return View(patient);
     }
+
 }
