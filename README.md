@@ -9,6 +9,6 @@ This is still not done, so much to fix on this later
 ![Add Patient](https://github.com/max31337/PatientManagementSystem/blob/main/projimg/createpatient.png?raw=true).
 ![Patient Records](https://github.com/max31337/PatientManagementSystem/blob/main/projimg/patientlist.png?raw=true)
 
-This two will change in the future
+These two will change in the future
 ![Payment](https://github.com/max31337/PatientManagementSystem/blob/main/projimg/payments.png?raw=true).
 ![EMR](https://github.com/max31337/PatientManagementSystem/blob/main/projimg/emr.png?raw=true).
