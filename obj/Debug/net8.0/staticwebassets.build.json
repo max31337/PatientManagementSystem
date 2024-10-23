@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "irv39OEsuC+hRL6WdDduSIXq9MxHB3KoF5Bnu6DDf2Y=",
+  "Hash": "JvvHPSDQdpDQ5pH1Iz7CrblrUFBkgi6U4E1ettOm6kQ=",
   "Source": "PatientManagementSystem",
   "BasePath": "_content/PatientManagementSystem",
   "Mode": "Default",
@@ -16,44 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\PatientManagementSystem.styles.css",
-      "SourceId": "PatientManagementSystem",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
-      "BasePath": "_content/PatientManagementSystem",
-      "RelativePath": "PatientManagementSystem.styles.css",
-      "AssetKind": "All",
-      "AssetMode": "CurrentProject",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ApplicationBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\obj\\Debug\\net8.0\\scopedcss\\bundle\\PatientManagementSystem.styles.css"
-    },
-    {
-      "Identity": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\PatientManagementSystem.bundle.scp.css",
-      "SourceId": "PatientManagementSystem",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
-      "BasePath": "_content/PatientManagementSystem",
-      "RelativePath": "PatientManagementSystem.bundle.scp.css",
-      "AssetKind": "All",
-      "AssetMode": "Reference",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ProjectBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\PatientManagementSystem.bundle.scp.css"
-    },
     {
       "Identity": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\css\\output.css",
       "SourceId": "PatientManagementSystem",

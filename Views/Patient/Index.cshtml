@@ -1,7 +1,11 @@
 ﻿@model IEnumerable<PatientManagementSystem.Models.Patient>
+@{
+    ViewData["HideFooter"] = true;
+
+}
 
 <div class="container mx-auto px-4 py-6">
-    <h2 class="text-3xl font-bold text-applegreen mb-4">Patients</h2>
+    <h2 class="text-3xl font-bold text-stromboli mb-4">Patients</h2>
 
     @if (Model == null || !Model.Any())
     {

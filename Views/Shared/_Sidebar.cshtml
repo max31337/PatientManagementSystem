@@ -1,42 +1,73 @@
-﻿@using Microsoft.AspNetCore.Http
-@inject IHttpContextAccessor HttpContextAccessor
+﻿@inject IHttpContextAccessor HttpContextAccessor
 
 @{
-    // Retrieve username and user role from session
-    var username = HttpContextAccessor.HttpContext?.Session.GetString("Username");
-    var userRole = HttpContextAccessor.HttpContext?.Session.GetString("UserRole");
+    bool hideHeader = (bool)(ViewData["HideHeader"] ?? false);
+    bool hideSidebar = (bool)(ViewData["HideSidebar"] ?? false);
+    bool hideFooter = (bool)(ViewData["HideFooter"] ?? false);
 }
 
-<<aside class="w-64 bg-downy-200 shadow-md h-500 flex flex-col"> <!-- Removed p-4 from here -->
-    <nav class="flex-1">
-        <ul class="space-y-0"> <!-- Use space-y-0 to eliminate vertical spacing -->
-            <li>
-                <a href="/Patient/Create" class="bg-applegreen text-stromboli font-semibold py-2 px-4 block hover:bg-downy hover:text-white transition duration-300 w-full text-center">Patient Registration</a>
-            </li>
-            <li>
-                <a href="/Patient" class="bg-applegreen text-stromboli font-semibold py-2 px-4 block hover:bg-downy hover:text-white transition duration-300 w-full text-center">Patient Records</a>
-            </li>
-            <li>
-                <a href="/Payment" class="bg-applegreen text-stromboli font-semibold py-2 px-4 block hover:bg-downy hover:text-white transition duration-300 w-full text-center">Patient Payments</a>
-            </li>
-            <li>
-                <a href="/MedicalRecord" class="bg-applegreen text-stromboli font-semibold py-2 px-4 block hover:bg-downy hover:text-white transition duration-300 w-full text-center">Electronic Medical Records</a>
-            </li>
-        </ul>
-    </nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Patient Management System</title>
+    <link rel="stylesheet" href="~/css/output.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+    <script src="~/js/tailwind-config.js"></script>
+</head>
+<body class="bg-applegreen flex flex-col min-h-screen">
 
-    <!-- Logout Button and User Info at the bottom -->
-    <div class="flex items-center justify-between mt-4">
-        <!-- Adjusted margin to ensure it touches the footer -->
-        <div class="text-stromboli">
-            <span class="font-semibold">@username</span><br />
-            <span class="text-sm">@userRole</span>
-        </div>
-        <form method="post" action="/Account/Logout" class="inline">
-            <button type="submit" class="bg-downy text-stromboli font-semibold py-2 px-4 rounded hover:bg-stromboli hover:text-white transition duration-300 w-full text-center">
-                <!-- Stretched button -->
-                Logout
-            </button>
-        </form>
+    @if (!hideHeader) // Render header if not hidden
+    {
+        <header class="bg-downy p-2 shadow-md flex items-center sticky top-0 z-10">
+            <div class="w-9 h-9 bg-red-500 rounded-full mr-4"></div>
+            <h1 class="text-white text-s font-bold">Patient Management System</h1>
+        </header>
+    }
+
+    <div class="flex flex-1">
+        @if (!hideSidebar)
+        {
+            @await Html.PartialAsync("_Sidebar")
+        }
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="fixed top-4 right-4 z-50">
+                <div class="bg-red-500 text-white font-semibold p-4 rounded-lg shadow-lg">
+                    @TempData["ErrorMessage"]
+                    <button class="absolute top-1 right-1 text-white hover:text-gray-200" onclick="this.parentElement.style.display='none';">
+                        &times;
+                    </button>
+                </div>
+            </div>
+        }
+
+        <main class="flex-1 flex items-start justify-center p-4 mt-6">
+            @RenderBody()
+        </main>
+
     </div>
-</aside>
+
+    @if (!hideFooter) // Render footer if not hidden
+    {
+        <footer class="bg-stromboli text-center p-2 block shadow-md z-0 flex justify-between items-center mt-auto">
+            <p class="text-white text-sm m-0">
+                &copy; @DateTime.Now.Year - Patient Management System
+            </p>
+            <div class="text-sm">
+                <a href="@Url.Action("Privacy", "Home")" class="text-downy hover:underline px-2">
+                    Privacy Policy
+                </a>
+                |
+                <a href="@Url.Action("Contact", "Home")" class="text-downy hover:underline px-2">
+                    Contact Us
+                </a>
+            </div>
+        </footer>
+    }
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

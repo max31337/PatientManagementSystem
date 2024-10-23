@@ -2,7 +2,8 @@
 
 @{
     var hideSidebar = ViewData["HideSidebar"] as bool? ?? false;
-    var hideHeaderFooter = ViewData["HideHeaderFooter"] as bool? ?? false; // Check for hide header/footer
+    var hideHeader = ViewData["HideHeader"] as bool? ?? false; // Check for hide header
+    var hideFooter = ViewData["HideFooter"] as bool? ?? false; // Check for hide footer
 }
 
 <!DOCTYPE html>
@@ -14,11 +15,10 @@
     <link rel="stylesheet" href="~/css/output.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
     <script src="~/js/tailwind-config.js"></script>
-
 </head>
 <body class="bg-applegreen flex flex-col min-h-screen">
 
-    @if (!hideHeaderFooter) // Render header if not hidden
+    @if (!hideHeader) // Render header if not hidden
     {
         <header class="bg-downy p-2 shadow-md flex items-center sticky top-0 z-10">
             <!-- Red Circle Logo Placeholder -->
@@ -27,24 +27,35 @@
         </header>
     }
 
-    <div class="flex">
+    <div class="flex flex-1"> <!-- Set the flex container to fill available space -->
         @if (!hideSidebar)
         {
             @await Html.PartialAsync("_Sidebar")
             // Render the sidebar if not hidden
         }
 
-        <main class="flex-1 p-4">
-            <div class="container mx-auto">
+        <main class="flex-1 flex items-center justify-center p-4">
                 @RenderBody()
             </div>
         </main>
+
     </div>
 
-    @if (!hideHeaderFooter) // Render footer if not hidden
+    @if (!hideFooter) // Render footer if not hidden
     {
-        <footer class="bg-stromboli text-center p-3 block shadow-md sticky bottom-0 z-10">
-            <p class="text-white">&copy; @DateTime.Now.Year - Patient Management System</p>
+        <footer class="bg-stromboli text-center p-2 block shadow-md z-0 flex justify-between items-center mt-auto"> <!-- Added mt-auto -->
+            <p class="text-white text-sm m-0">
+                &copy; @DateTime.Now.Year - Patient Management System
+            </p>
+            <div class="text-sm">
+                <a href="@Url.Action("Privacy", "Home")" class="text-downy hover:underline px-2">
+                    Privacy Policy
+                </a>
+                |
+                <a href="@Url.Action("Contact", "Home")" class="text-downy hover:underline px-2">
+                    Contact Us
+                </a>
+            </div>
         </footer>
     }
 

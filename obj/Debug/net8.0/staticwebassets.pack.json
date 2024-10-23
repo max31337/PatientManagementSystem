@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\PatientManagementSystem.bundle.scp.css",
-      "PackagePath": "staticwebassets\\PatientManagementSystem.bundle.scp.css"
-    },
-    {
       "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\css\\output.css",
       "PackagePath": "staticwebassets\\css\\output.css"
     },

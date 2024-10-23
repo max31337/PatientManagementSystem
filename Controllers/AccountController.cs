@@ -123,6 +123,7 @@ public class AccountController : Controller
         return Convert.ToBase64String(salt) + "." + hashed;
     }
 
+
     [HttpPost]
     public IActionResult Logout()
     {

@@ -1,49 +1,68 @@
 ﻿@model PatientManagementSystem.ViewModels.RegisterViewModel
 @{
     ViewData["Title"] = "Register";
-    ViewData["HideSidebar"] = true; 
+    ViewData["HideSidebar"] = true;
     Layout = "_Layout";
 
 }
 
-<div class="container mx-auto px-4 py-6">
-    <h2 class="text-3xl font-bold text-applegreen mb-6">Register</h2>
+<form asp-action="Register" method="post" class="bg-white shadow-md rounded-lg p-4 w-full max-w-xl mx-auto">
+    <!-- Reduced padding -->
+    <h2 class="text-lg font-bold text-stromboli mb-2 text-center">Register</h2> <!-- Reduced font size and margin bottom -->
+    <div class="gap-1">
+        <!-- Reduced gap -->
+        <div class="mb-1 ">
+            <label asp-for="Email" class="block text-gray-700 font-semibold mb-1 text-left"></label>
+            <input asp-for="Email" required class="border border-gray-300 p-1 text-sm w-full rounded" /> <!-- Reduced padding and font size -->
+            <span asp-validation-for="Email" class="text-red-500 text-xs"></span> <!-- Reduced font size -->
+        </div>
 
-    <form asp-action="Register" method="post" class="bg-white shadow-md rounded-lg p-6">
-        <div class="mb-4">
-            <label asp-for="Email" class="block text-gray-700 font-semibold mb-2"></label>
-            <input asp-for="Email" required class="border border-gray-300 p-2 w-full rounded" />
-            <span asp-validation-for="Email" class="text-red-500 text-sm"></span>
+        <div class="mb-1">
+            <!-- Reduced margin bottom -->
+            <label asp-for="Username" class="block text-gray-700 font-semibold mb-1 text-left"></label>
+            <input asp-for="Username" required class="border border-gray-300 p-1 text-sm w-full rounded" /> <!-- Reduced padding and font size -->
+            <span asp-validation-for="Username" class="text-red-500 text-xs"></span> <!-- Reduced font size -->
         </div>
-        <div class="mb-4">
-            <label asp-for="Username" class="block text-gray-700 font-semibold mb-2"></label>
-            <input asp-for="Username" required class="border border-gray-300 p-2 w-full rounded" />
-            <span asp-validation-for="Username" class="text-red-500 text-sm"></span>
+
+        <div class="mb-1">
+            <!-- Reduced margin bottom -->
+            <label asp-for="Password" class="block text-gray-700 font-semibold mb-1 text-left"></label>
+            <input asp-for="Password" type="password" required class="border border-gray-300 p-1 text-sm w-full rounded" /> <!-- Reduced padding and font size -->
+            <span asp-validation-for="Password" class="text-red-500 text-xs"></span> <!-- Reduced font size -->
         </div>
-        <div class="mb-4">
-            <label asp-for="Password" class="block text-gray-700 font-semibold mb-2"></label>
-            <input asp-for="Password" type="password" required class="border border-gray-300 p-2 w-full rounded" />
-            <span asp-validation-for="Password" class="text-red-500 text-sm"></span>
+
+        <div class="mb-1">
+            <!-- Reduced margin bottom -->
+            <label asp-for="ConfirmPassword" class="block text-gray-700 font-semibold mb-1 text-left">Confirm Password</label>
+            <input asp-for="ConfirmPassword" type="password" required class="border border-gray-300 p-1 text-sm w-full rounded" /> <!-- Reduced padding and font size -->
+            <span asp-validation-for="ConfirmPassword" class="text-red-500 text-xs"></span> <!-- Reduced font size -->
         </div>
-        <div class="mb-4">
-            <label asp-for="ConfirmPassword" class="block text-gray-700 font-semibold mb-2"></label>
-            <input asp-for="ConfirmPassword" type="password" required class="border border-gray-300 p-2 w-full rounded" />
-            <span asp-validation-for="ConfirmPassword" class="text-red-500 text-sm"></span>
-        </div>
-        <div class="mb-4">
-            <label asp-for="UserRole" class="block text-gray-700 font-semibold mb-2">User Role</label>
-            <select asp-for="UserRole" class="border border-gray-300 p-2 w-full rounded" required>
+
+        <div class="mb-1">
+            <label asp-for="UserRole" class="block text-gray-700 font-semibold mb-1 text-left">User Role</label>
+            <select asp-for="UserRole" class="border border-gray-300 p-1 text-sm w-full rounded" required>
                 <option value="">Select Role</option>
                 @foreach (var role in Enum.GetValues(typeof(UserRole)).Cast<UserRole>())
                 {
                     <option value="@role">@role</option>
                 }
             </select>
-            <span asp-validation-for="UserRole" class="text-red-500 text-sm"></span>
+            <span asp-validation-for="UserRole" class="text-red-500 text-xs"></span> <!-- Reduced font size -->
         </div>
-        <button type="submit" class="bg-stromboli text-gray-700 font-semibold py-2 px-4 rounded hover:bg-stromboli transition duration-300">Register</button>
-    </form>
-</div>
+
+        <div class="text-center">
+            <button type="submit" class="bg-downy text-stromboli font-semibold py-1 px-3 rounded hover:bg-stromboli hover:text-white transition duration-300 w-xl mt-2 text-sm">Register</button> <!-- Reduced padding and font size -->
+        </div>
+    </div>
+
+    <div class="mt-2 text-center">
+        <p class="text-gray-600 text-xs">
+            Already have an account?
+            <a href="@Url.Action("Login", "Account")" class="text-downy hover:underline">Login here</a>
+        </p>
+    </div>
+</form>
+
 
 @section Scripts {
     @{

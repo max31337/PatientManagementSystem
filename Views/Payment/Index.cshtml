@@ -1,7 +1,12 @@
 ﻿@model IEnumerable<Payment>
 
+@{
+    ViewData["HideFooter"] = true;
+
+}
+
 <div class="container mx-auto px-4 py-6">
-    <h2 class="text-3xl font-bold text-applegreen mb-4">Payments</h2>
+    <h2 class="text-3xl font-bold text-stromboli mb-4">Payments</h2>
     <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
         <thead class="bg-stromboli">
             <tr class="text-white">

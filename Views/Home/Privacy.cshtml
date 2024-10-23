@@ -1,7 +1,40 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
+    ViewData["HideSidebar"] = true;
     Layout = "_Layout";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+    <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl lg:max-w-2xl">
+        <!-- Adjusted padding -->
+        <!-- Header Section -->
+        <h1 class="text-3xl font-bold text-stromboli mb-4 text-center">
+            @ViewData["Title"]
+        </h1>
+
+        <!-- Policy Content -->
+        <p class="text-gray-700 mb-4">
+            <!-- Adjusted margin -->
+            This page outlines the privacy practices of the Patient Management System. We value your privacy and are committed to protecting your personal information.
+        </p>
+
+        <ul class="list-disc list-inside text-gray-600 mb-4">
+            <!-- Adjusted margin -->
+            <li>Your data will only be used for providing the services you request.</li>
+            <li>We do not share your personal information with third parties without your consent.</li>
+            <li>Security measures are in place to protect your data from unauthorized access.</li>
+        </ul>
+
+        <p class="text-gray-700 mb-4">
+            <!-- Adjusted margin -->
+            For more information, feel free to contact us. By using this system, you agree to our privacy practices.
+        </p>
+
+        <!-- Back Button -->
+        <div class="flex justify-center mt-4">
+            <!-- Adjusted margin -->
+            <a href="@Url.Action("Index", "Home")"
+               class="bg-downy text-white font-bold py-2 px-6 rounded hover:bg-stromboli transition duration-300">
+                Back to Home
+            </a>
+        </div>
+</div>
