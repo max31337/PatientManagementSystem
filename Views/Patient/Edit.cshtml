@@ -1,5 +1,38 @@
-﻿@model IEnumerable<PatientManagementSystem.Models.Patient>
+﻿@model PatientManagementSystem.ViewModels.PatientViewModel
 @{
     ViewData["HideFooter"] = true;
 
 }
+
+<div class="container mx-auto px-4 py-6">
+    <h2 class="text-3xl font-bold text-stromboli mb-4">Edit Patient</h2>
+    <form asp-action="Edit" method="post" class="bg-white shadow-md rounded-lg p-6 max-w-3xl mx-auto">
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="mb-4">
+                <label asp-for="FullName" class="block text-sm font-medium text-gray-700"></label>
+                <input asp-for="FullName" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+                <span asp-validation-for="FullName" class="text-red-500 text-sm"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="DateOfBirth" class="block text-sm font-medium text-gray-700"></label>
+                <input asp-for="DateOfBirth" type="date" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+                <span asp-validation-for="DateOfBirth" class="text-red-500 text-sm"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Address" class="block text-sm font-medium text-gray-700"></label>
+                <input asp-for="Address" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+                <span asp-validation-for="Address" class="text-red-500 text-sm"></span>
+            </div>
+        </div>
+
+        <button type="submit" class="bg-stromboli text-white font-semibold py-2 px-4 rounded-md hover:bg-stromboli mt-4">
+            Update
+        </button>
+    </form>
+</div>

@@ -15,11 +15,29 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Configure Payment entity
+        modelBuilder.Entity<Patient>()
+            .ToTable("Patients");
+
         modelBuilder.Entity<Payment>(entity =>
         {
             entity.Property(e => e.Amount)
-                .HasColumnType("decimal(18, 2)"); 
+                .HasColumnType("decimal(18, 2");
+
+            entity.HasOne(p => p.Patient) 
+                .WithMany(p => p.Payments)
+                .HasForeignKey(p => p.PatientId)
+                .OnDelete(DeleteBehavior.Cascade); 
+        });
+
+        modelBuilder.Entity<MedicalRecord>(entity =>
+        {
+            entity.Property(e => e.RecordDetails)
+                .IsRequired(); 
+
+            entity.HasOne(m => m.Patient) 
+                .WithMany(p => p.MedicalRecords)
+                .HasForeignKey(m => m.PatientId)
+                .OnDelete(DeleteBehavior.Cascade); 
         });
 
         modelBuilder.Entity<User>()

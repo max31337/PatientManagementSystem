@@ -14,8 +14,6 @@ namespace PatientManagementSystem.Models
 
         [Required]
         public string Address { get; set; }
-
-        public string MedicalRecord { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }
         public virtual ICollection<MedicalRecord> MedicalRecords { get; set; }
     }

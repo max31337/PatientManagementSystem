@@ -1,36 +1,52 @@
-﻿@model PatientManagementSystem.Models.Patient
-
-@{
-    ViewData["HideFooter"] = true;
-
-}
+﻿@using PatientManagementSystem.ViewModels
+@model PatientManagementSystem.ViewModels.PatientViewModel
 
 <div class="container mx-auto px-4 py-6">
     <h2 class="text-3xl font-bold text-stromboli mb-4">Create Patient</h2>
+
+    <!-- Patient Creation Form -->
     <form asp-action="Create" method="post" class="bg-white shadow-md rounded-lg p-6 max-w-3xl mx-auto">
+        @Html.AntiForgeryToken()
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="mb-4">
                 <label asp-for="FullName" class="block text-sm font-medium text-gray-700"></label>
                 <input asp-for="FullName" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
                 <span asp-validation-for="FullName" class="text-red-500 text-sm"></span>
             </div>
+
             <div class="mb-4">
                 <label asp-for="DateOfBirth" class="block text-sm font-medium text-gray-700"></label>
                 <input asp-for="DateOfBirth" type="date" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
                 <span asp-validation-for="DateOfBirth" class="text-red-500 text-sm"></span>
             </div>
+
             <div class="mb-4">
                 <label asp-for="Address" class="block text-sm font-medium text-gray-700"></label>
                 <input asp-for="Address" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
                 <span asp-validation-for="Address" class="text-red-500 text-sm"></span>
             </div>
-            <div class="mb-4">
-                <label asp-for="MedicalRecord" class="block text-sm font-medium text-gray-700"></label>
-                <textarea asp-for="MedicalRecord" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows="2"></textarea> <!-- Reduced rows -->
-                <span asp-validation-for="MedicalRecord" class="text-red-500 text-sm"></span>
-            </div>
         </div>
-        <button type="submit" class="bg-stromboli text-white font-semibold py-2 px-4 rounded-md hover:bg-stromboli mt-4">Create</button>
-        @Html.AntiForgeryToken()
+
+        <button type="submit" class="bg-stromboli text-white font-semibold py-2 px-4 rounded-md hover:bg-stromboli mt-4">
+            Create Patient
+        </button>
     </form>
+
+    @if (Model.Id != 0) // Assuming Model.Id is set to the PatientID after creation
+    {
+        <div class="mt-4">
+            <h3 class="text-2xl font-semibold">Patient Created Successfully!</h3>
+            <p>Your Patient ID is: <strong>@Model.Id</strong></p>
+        </div>
+
+        <!-- Render Payment Form Partial View -->
+        <h3 class="text-2xl font-semibold mt-6">Add Payment</h3>
+        <partial name="~/Views/Payment/_PaymentForm.cshtml" model="new PaymentViewModel { PatientId = Model.Id }" />
+
+        <!-- Render Medical Record Form Partial View -->
+        <h3 class="text-2xl font-semibold mt-6">Add Medical Record</h3>
+        <partial name="~/Views/MedicalRecord/_MedicalRecordForm.cshtml" model="new MedicalRecordViewModel { PatientId = Model.Id }" />
+
+         }
 </div>

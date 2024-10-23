@@ -7,13 +7,14 @@ public class Payment
     public int Id { get; set; }
 
     [Required]
-    [ForeignKey("Patient")] 
+    [ForeignKey("Patient")]
     public int PatientId { get; set; }
 
     public decimal Amount { get; set; }
     public DateTime PaymentDate { get; set; }
     public bool IsPaid { get; set; }
 
-    // Navigation property for related patient
+    [ForeignKey("PatientId")]
     public virtual Patient Patient { get; set; }
+
 }

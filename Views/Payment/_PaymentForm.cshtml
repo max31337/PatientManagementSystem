@@ -1,0 +1,69 @@
+﻿@model PatientManagementSystem.ViewModels.PaymentViewModel
+
+<div class="bg-white shadow-md rounded-lg p-4 mt-4">
+    <h4 class="text-xl font-semibold">Payment Information</h4>
+
+    <!-- Message display area -->
+    <div id="message" class="mb-4 text-sm font-medium"></div>
+
+    <form id="paymentForm">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="PatientId" />
+
+        <div class="mb-4">
+            <label asp-for="FullName" class="block text-sm font-medium text-gray-700"></label>
+            <input asp-for="FullName" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required />
+            <span asp-validation-for="FullName" class="text-red-500 text-sm"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Amount" class="block text-sm font-medium text-gray-700"></label>
+            <input asp-for="Amount" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required />
+            <span asp-validation-for="Amount" class="text-red-500 text-sm"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="PaymentDate" class="block text-sm font-medium text-gray-700"></label>
+            <input asp-for="PaymentDate" type="date" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required />
+            <span asp-validation-for="PaymentDate" class="text-red-500 text-sm"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="IsPaid" class="flex items-center">
+                <input asp-for="IsPaid" type="checkbox" class="mr-2" />
+                <span class="text-sm">Payment Completed</span>
+            </label>
+        </div>
+
+        <button type="button" class="bg-stromboli text-white font-semibold py-2 px-4 rounded-md hover:bg-stromboli mt-4" onclick="submitPaymentForm();">
+            Add Payment
+        </button>
+    </form>
+</div>
+
+<script>
+    function submitPaymentForm() {
+        const form = document.getElementById('paymentForm');
+        const formData = new FormData(form);
+        const messageDiv = document.getElementById('message');
+
+        fetch('@Url.Action("CreatePayment", "Payment")', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                messageDiv.innerHTML = ''; 
+                if (data.success) {
+                    messageDiv.innerHTML = '<span class="text-green-500">Payment added successfully!</span>';
+                    form.reset();
+                } else {
+                    messageDiv.innerHTML = '<span class="text-red-500">' + data.errors.join(', ') + '</span>';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                messageDiv.innerHTML = '<span class="text-red-500">An error occurred while processing your request.</span>';
+            });
+    }
+</script>
