@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "J8mcbDXDEbx0sGdipNGM8iakW9c6oxe1rlICUw+afdQ=",
+  "Hash": "eo6Gr/CnQuzEJARRZDiaHACwrD4L6MpJLZmnt3pa32E=",
   "Source": "PatientManagementSystem",
   "BasePath": "_content/PatientManagementSystem",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\css\\output.css",
+      "Identity": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\css\\site.css",
       "SourceId": "PatientManagementSystem",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\",
       "BasePath": "_content/PatientManagementSystem",
-      "RelativePath": "css/output.css",
+      "RelativePath": "css/site.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -33,7 +33,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\output.css"
+      "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
       "Identity": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\favicon.ico",
