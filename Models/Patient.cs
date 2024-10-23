@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-
 namespace PatientManagementSystem.Models
 {
     public class Patient
@@ -17,5 +16,7 @@ namespace PatientManagementSystem.Models
         public string Address { get; set; }
 
         public string MedicalRecord { get; set; }
+        public virtual ICollection<Payment> Payments { get; set; }
+        public virtual ICollection<MedicalRecord> MedicalRecords { get; set; }
     }
 }

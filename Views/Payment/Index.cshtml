@@ -29,6 +29,7 @@
                 {
                     <tr class="border-b hover:bg-gray-100">
                         <td class="py-2 px-4">@payment.PatientId</td>
+                        <td class="py-2 px-4">@payment.Patient?.FullName</td>
                         <td class="py-2 px-4">@payment.Amount.ToString("C")</td>
                         <td class="py-2 px-4">@payment.PaymentDate.ToShortDateString()</td>
                         <td class="py-2 px-4">@((payment.IsPaid) ? "Paid" : "Unpaid")</td>

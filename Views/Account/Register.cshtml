@@ -7,35 +7,30 @@
 }
 
 <form asp-action="Register" method="post" class="bg-white shadow-md rounded-lg p-4 w-full max-w-xl mx-auto">
-    <!-- Reduced padding -->
-    <h2 class="text-lg font-bold text-stromboli mb-2 text-center">Register</h2> <!-- Reduced font size and margin bottom -->
+    <h2 class="text-lg font-bold text-stromboli mb-2 text-center">Register</h2>->
     <div class="gap-1">
-        <!-- Reduced gap -->
         <div class="mb-1 ">
             <label asp-for="Email" class="block text-gray-700 font-semibold mb-1 text-left"></label>
-            <input asp-for="Email" required class="border border-gray-300 p-1 text-sm w-full rounded" /> <!-- Reduced padding and font size -->
-            <span asp-validation-for="Email" class="text-red-500 text-xs"></span> <!-- Reduced font size -->
+            <input asp-for="Email" required class="border border-gray-300 p-1 text-sm w-full rounded" />
+            <span asp-validation-for="Email" class="text-red-500 text-xs"></span> 
         </div>
 
         <div class="mb-1">
-            <!-- Reduced margin bottom -->
             <label asp-for="Username" class="block text-gray-700 font-semibold mb-1 text-left"></label>
-            <input asp-for="Username" required class="border border-gray-300 p-1 text-sm w-full rounded" /> <!-- Reduced padding and font size -->
-            <span asp-validation-for="Username" class="text-red-500 text-xs"></span> <!-- Reduced font size -->
+            <input asp-for="Username" required class="border border-gray-300 p-1 text-sm w-full rounded" /> 
+            <span asp-validation-for="Username" class="text-red-500 text-xs"></span> 
         </div>
 
         <div class="mb-1">
-            <!-- Reduced margin bottom -->
             <label asp-for="Password" class="block text-gray-700 font-semibold mb-1 text-left"></label>
-            <input asp-for="Password" type="password" required class="border border-gray-300 p-1 text-sm w-full rounded" /> <!-- Reduced padding and font size -->
-            <span asp-validation-for="Password" class="text-red-500 text-xs"></span> <!-- Reduced font size -->
+            <input asp-for="Password" type="password" required class="border border-gray-300 p-1 text-sm w-full rounded" /> 
+            <span asp-validation-for="Password" class="text-red-500 text-xs"></span> 
         </div>
 
         <div class="mb-1">
-            <!-- Reduced margin bottom -->
             <label asp-for="ConfirmPassword" class="block text-gray-700 font-semibold mb-1 text-left">Confirm Password</label>
-            <input asp-for="ConfirmPassword" type="password" required class="border border-gray-300 p-1 text-sm w-full rounded" /> <!-- Reduced padding and font size -->
-            <span asp-validation-for="ConfirmPassword" class="text-red-500 text-xs"></span> <!-- Reduced font size -->
+            <input asp-for="ConfirmPassword" type="password" required class="border border-gray-300 p-1 text-sm w-full rounded" />
+            <span asp-validation-for="ConfirmPassword" class="text-red-500 text-xs"></span> 
         </div>
 
         <div class="mb-1">
@@ -47,7 +42,7 @@
                     <option value="@role">@role</option>
                 }
             </select>
-            <span asp-validation-for="UserRole" class="text-red-500 text-xs"></span> <!-- Reduced font size -->
+            <span asp-validation-for="UserRole" class="text-red-500 text-xs"></span> 
         </div>
 
         <div class="text-center">

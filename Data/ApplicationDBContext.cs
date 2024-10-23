@@ -6,7 +6,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Patient> Patients { get; set; }
     public DbSet<Payment> Payments { get; set; }
     public DbSet<MedicalRecord> MedicalRecords { get; set; }
-    public DbSet<User> Users { get; set; } // Add your custom User entity here
+    public DbSet<User> Users { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -15,10 +15,16 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
+        // Configure Payment entity
+        modelBuilder.Entity<Payment>(entity =>
+        {
+            entity.Property(e => e.Amount)
+                .HasColumnType("decimal(18, 2)"); 
+        });
 
-        // Customize the User table if necessary
         modelBuilder.Entity<User>()
             .ToTable("Users");
+
+        base.OnModelCreating(modelBuilder);
     }
 }
