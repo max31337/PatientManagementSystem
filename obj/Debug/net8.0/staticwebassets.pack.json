@@ -9,6 +9,22 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\images\\EMR.png",
+      "PackagePath": "staticwebassets\\images\\EMR.png"
+    },
+    {
+      "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\images\\patientpayment.png",
+      "PackagePath": "staticwebassets\\images\\patientpayment.png"
+    },
+    {
+      "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\images\\patientrec.png",
+      "PackagePath": "staticwebassets\\images\\patientrec.png"
+    },
+    {
+      "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\images\\patientreg.png",
+      "PackagePath": "staticwebassets\\images\\patientreg.png"
+    },
+    {
       "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
