@@ -1,7 +1,7 @@
 # PatientManagementSystem
 shitty school project using .NET 8 MVC using razor view with tailwind
 
-This is still not done, so much to fix on this later
+This is still not done, so much to fix on this later. See my Issue #4 https://github.com/max31337/PatientManagementSystem/issues/4
 
 ![Home ](https://github.com/max31337/PatientManagementSystem/blob/main/projimg/home.png?raw=true)
 ![Login Page](https://github.com/max31337/PatientManagementSystem/blob/main/projimg/login.png?raw=true)
