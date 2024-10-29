@@ -41,10 +41,8 @@ public class PatientController : Controller
             _context.Patients.Add(patient);
             await _context.SaveChangesAsync();
 
-            // Set the Id back to the model
             model.Id = patient.Id;
 
-            // Return the view with the updated model
             return View(model);
 
         }
@@ -54,10 +52,8 @@ public class PatientController : Controller
 
     public async Task<IActionResult> Edit(int id)
     {
-        // Check if the request is a POST (form submission) or a GET (initial page load)
         if (Request.Method == HttpMethods.Post)
         {
-            // Model binding for form submission
             var model = new PatientViewModel();
             await TryUpdateModelAsync(model);
 
@@ -66,7 +62,6 @@ public class PatientController : Controller
                 var patient = await _context.Patients.FindAsync(model.Id);
                 if (patient == null) return NotFound();
 
-                // Update the patient details
                 patient.FullName = model.FullName;
                 patient.DateOfBirth = model.DateOfBirth;
                 patient.Address = model.Address;
@@ -77,16 +72,13 @@ public class PatientController : Controller
                 return RedirectToAction(nameof(Index));
             }
 
-            // Return to the view with the current model if the validation fails
             return View(model);
         }
         else
         {
-            // Handle GET request: load the existing patient details
             var patient = await _context.Patients.FindAsync(id);
             if (patient == null) return NotFound();
 
-            // Populate the view model with patient data
             var viewModel = new PatientViewModel
             {
                 Id = patient.Id,
@@ -112,6 +104,50 @@ public class PatientController : Controller
         }
 
         return View(patient);
+    }
+
+    public async Task<JsonResult> Search(string searchTerm, string sortBy, string sortOrder)
+    {
+        var patientsQuery = _context.Patients.AsQueryable();
+
+        // Filter by search term (both name and Patient ID)
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+            if (int.TryParse(searchTerm, out int patientId))
+            {
+                // Search by Patient ID
+                patientsQuery = patientsQuery.Where(p => p.Id == patientId);
+            }
+            else
+            {
+                // Search by Full Name
+                patientsQuery = patientsQuery.Where(p => p.FullName.Contains(searchTerm));
+            }
+        }
+
+        // Sorting
+        switch (sortBy)
+        {
+            case "Name":
+                patientsQuery = sortOrder == "asc" ?
+                                patientsQuery.OrderBy(p => p.FullName) :
+                                patientsQuery.OrderByDescending(p => p.FullName);
+                break;
+            case "DateOfBirth":
+                patientsQuery = sortOrder == "asc" ?
+                                patientsQuery.OrderBy(p => p.DateOfBirth) :
+                                patientsQuery.OrderByDescending(p => p.DateOfBirth);
+                break;
+            default:
+                patientsQuery = sortOrder == "asc" ?
+                                patientsQuery.OrderBy(p => p.Id) :
+                                patientsQuery.OrderByDescending(p => p.Id);
+                break;
+        }
+
+        var patients = await patientsQuery.ToListAsync();
+
+        return Json(patients);
     }
 
 }

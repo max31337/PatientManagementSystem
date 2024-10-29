@@ -1,11 +1,23 @@
 ﻿@model IEnumerable<PatientManagementSystem.Models.Patient>
 @{
     ViewData["HideFooter"] = true;
-
 }
 
 <div class="container mx-auto px-4 py-6">
     <h2 class="text-3xl font-bold text-stromboli mb-4">Patients</h2>
+
+    <div class="flex mb-4">
+        <input type="text" id="searchInput" placeholder="Search by Patient ID or Name..." class="mb-4 p-2 border border-gray-300 rounded flex-grow" />
+
+        <select id="sortSelect" class="ml-2 p-2 border border-gray-300 rounded">
+            <option value="">Sort By</option>
+            <option value="Name">Name</option>
+            <option value="DateOfBirth">Date of Birth</option>
+        </select>
+
+        <button id="ascButton" class="ml-2 p-2 bg-green-500 text-white rounded">Asc</button>
+        <button id="descButton" class="ml-2 p-2 bg-red-500 text-white rounded">Desc</button>
+    </div>
 
     @if (Model == null || !Model.Any())
     {
@@ -13,7 +25,7 @@
     }
     else
     {
-        <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md" id="patientTable">
             <thead class="bg-stromboli text-white">
                 <tr>
                     <th class="py-2 px-4 border-b">Patient ID</th>
@@ -41,3 +53,61 @@
         </table>
     }
 </div>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function fetchPatients(sortOrder) {
+                var searchTerm = $('#searchInput').val();
+                var sortBy = $('#sortSelect').val();
+
+                $.ajax({
+                    url: '@Url.Action("Search", "Patient")',
+                    type: 'GET',
+                    data: { searchTerm: searchTerm, sortBy: sortBy, sortOrder: sortOrder },
+                    success: function (data) {
+                        var tableBody = $('#patientTable tbody');
+                        tableBody.empty(); // Clear existing table rows
+                        $.each(data, function (i, patient) {
+                            tableBody.append('<tr class="hover:bg-gray-100">' +
+                                '<td class="py-2 px-4 border-b">' + patient.id + '</td>' +
+                                '<td class="py-2 px-4 border-b">' + patient.fullName + '</td>' +
+                                '<td class="py-2 px-4 border-b">' + new Date(patient.dateOfBirth).toLocaleDateString() + '</td>' +
+                                '<td class="py-2 px-4 border-b">' + patient.address + '</td>' +
+                                '<td class="py-2 px-4 border-b">' +
+                                '<a href="@Url.Action("Edit", "Patient")?id=' + patient.id + '" class="text-stromboli hover:underline">Edit</a> | ' +
+                                '<a href="@Url.Action("Details", "Patient")?id=' + patient.id + '" class="text-stromboli hover:underline">Details</a>' +
+                                '</td>' +
+                                '</tr>');
+                        });
+                    }
+                });
+            }
+
+            // Event handlers
+            $('#searchInput').on('input', function () {
+                fetchPatients();
+            });
+
+            $('#sortSelect').on('change', function () {
+                fetchPatients('asc'); // Default to ascending when sorting
+            });
+
+            $('#filterButton').on('click', function () {
+                fetchPatients(); // Fetch based on current input
+            });
+
+            $('#ascButton').on('click', function () {
+                fetchPatients('asc'); // Fetch with ascending order
+            });
+
+            $('#descButton').on('click', function () {
+                fetchPatients('desc'); // Fetch with descending order
+            });
+
+            // Fetch all patients initially
+            fetchPatients();
+        });
+    </script>
+}

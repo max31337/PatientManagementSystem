@@ -12,28 +12,26 @@ public class MedicalRecordController : Controller
         _context = context;
     }
 
-    // List all medical records for a specific patient
+    // List all medical records for a specific patient, This is unused I'll get to this sometime
     public async Task<IActionResult> Index(int patientId)
     {
-        var records = _context.MedicalRecords.ToList(); // Adjust as needed
+        var records = _context.MedicalRecords.ToList(); 
         return View(records);
     }
 
-    // Render the form to create a new medical record for a patient
     public IActionResult Create(int patientId)
     {
-        ViewBag.PatientId = patientId; // Pass patient ID to the view
+        ViewBag.PatientId = patientId; 
         return View();
     }
 
-    // Handle form submission to create a new medical record (AJAX)
     [HttpPost]
     public async Task<IActionResult> CreateMedicalRecord(int patientId, string recordDetails)
     {
         var patient = await _context.Patients.FindAsync(patientId);
         if (patient == null)
         {
-            return Json(new { success = false, errors = "Patient not found." }); // Return JSON error
+            return Json(new { success = false, errors = "Patient not found." }); 
         }
 
         var newRecord = new MedicalRecord
@@ -45,7 +43,6 @@ public class MedicalRecordController : Controller
         _context.MedicalRecords.Add(newRecord);
         await _context.SaveChangesAsync();
 
-        // Return success response
         return Json(new { success = true });
     }
 }

@@ -2,11 +2,9 @@
 @inject IHttpContextAccessor HttpContextAccessor
 
 @{
-    // Retrieve username and user role from session
     var username = HttpContextAccessor.HttpContext?.Session.GetString("Username");
     var userRole = HttpContextAccessor.HttpContext?.Session.GetString("UserRole");
 
-    // Get the current URL path
     var currentPath = HttpContextAccessor.HttpContext?.Request.Path.Value;
 }
 

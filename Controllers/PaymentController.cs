@@ -49,7 +49,7 @@ public class PaymentController : Controller
                 PatientId = patientId,
                 Amount = paymentViewModel.Amount,
                 PaymentDate = paymentViewModel.PaymentDate,
-                IsPaid = true 
+                IsPaid = paymentViewModel.IsPaid 
             };
 
             _context.Payments.Add(payment);
