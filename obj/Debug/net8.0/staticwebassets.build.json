@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "znKmXSb4VqKSMp/sg4EUArjKbBg5EqIqzxau1H8xtgQ=",
+  "Hash": "4TJZOYU3kooRqIf724LxBf8MffTfYDm5ggUkEvoTq5I=",
   "Source": "PatientManagementSystem",
   "BasePath": "_content/PatientManagementSystem",
   "Mode": "Default",
@@ -16,6 +16,25 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\css\\print.css",
+      "SourceId": "PatientManagementSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\",
+      "BasePath": "_content/PatientManagementSystem",
+      "RelativePath": "css/print.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\print.css"
+    },
     {
       "Identity": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\css\\site.css",
       "SourceId": "PatientManagementSystem",

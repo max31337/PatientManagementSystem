@@ -62,6 +62,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNhbFJlY29yZFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/navar/source/repos/PatientManagementSystem/Views/MedicalRecord/PrintMedicalRecord.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNhbFJlY29yZFxQcmludE1lZGljYWxSZWNvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/navar/source/repos/PatientManagementSystem/Views/MedicalRecord/_MedicalRecordForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNhbFJlY29yZFxfTWVkaWNhbFJlY29yZEZvcm0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

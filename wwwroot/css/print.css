@@ -1,0 +1,26 @@
+﻿@media print {
+    /* Hide navigation, buttons, sidebar, header, footer, and any other elements you don't want to print */
+    nav,
+    .no-print,
+    .sidebar,
+    .aside, 
+    .span
+    header,
+    footer,
+    .print-button { /* If you have specific buttons with this class */
+        display: none;
+    }
+
+    /* Set the body styles for print */
+    body {
+        font-size: 12pt;
+        color: black;
+    }
+
+    /* You can also adjust margins, padding, etc. */
+    @page {
+        margin: 20mm;
+    }
+
+    /* Add any other print-specific styles */
+}

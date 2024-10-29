@@ -2,6 +2,9 @@
 
 @{
     ViewData["Title"] = "Medical Record Details";
+    ViewData["HideSidebar"] = true;
+    ViewData["HideHeader"] = true;
+    ViewData["HideFooter"] = true;
 }
 
 <div class="container mx-auto px-4 py-6">
@@ -46,42 +49,5 @@
 
         <h3 class="text-xl font-semibold border-b pb-2 mt-4">Record Details</h3>
         <p>@Model.RecordDetails</p>
-
-        <div class="mt-6">
-            <a href="@Url.Action("Edit", "MedicalRecord", new { id = Model.Id })" class="inline-block bg-stromboli text-white px-4 py-2 rounded shadow hover:bg-stromboli-dark no-print">Edit Record</a>
-            <a href="@Url.Action("Index", "MedicalRecord")" class="inline-block bg-gray-400 text-white px-4 py-2 rounded ml-2 hover:bg-gray-500 no-print">Back to List</a>
-            <button onclick="printPage()" class="inline-block bg-blue-500 text-white px-4 py-2 rounded ml-2 hover:bg-blue-600 no-print">Print</button>
-        </div>
-
     </div>
 </div>
-
-<style>
-    header, footer, aside {
-        display: none !important; /* Ensures these elements are hidden */
-    }
-
-
-    .bg-stromboli {
-        background-color: #2b4d1f; /* Example Stromboli color */
-    }
-
-    .bg-stromboli-dark {
-        background-color: #1e3312; /* Darker shade for hover */
-    }
-</style>
-
-<script>
-    function printPage() {
-        // Hide buttons before printing
-        const buttons = document.querySelectorAll('.no-print');
-        buttons.forEach(button => button.style.display = 'none');
-
-        // Open the print dialog
-        window.print();
-
-        // Restore buttons after printing
-        buttons.forEach(button => button.style.display = '');
-    }
-
-</script>

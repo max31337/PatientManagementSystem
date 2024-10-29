@@ -10,6 +10,7 @@ C:\Users\navar\source\repos\PatientManagementSystem\bin\Debug\net8.0\PatientMana
 C:\Users\navar\source\repos\PatientManagementSystem\bin\Debug\net8.0\PatientManagementSystem.pdb
 C:\Users\navar\source\repos\PatientManagementSystem\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\navar\source\repos\PatientManagementSystem\bin\Debug\net8.0\Azure.Identity.dll
+C:\Users\navar\source\repos\PatientManagementSystem\bin\Debug\net8.0\DinkToPdf.dll
 C:\Users\navar\source\repos\PatientManagementSystem\bin\Debug\net8.0\Humanizer.dll
 C:\Users\navar\source\repos\PatientManagementSystem\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\navar\source\repos\PatientManagementSystem\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll

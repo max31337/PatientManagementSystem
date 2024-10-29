@@ -1,19 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using PatientManagementSystem.Models;
 using PatientManagementSystem.ViewModels;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DinkToPdf;
+
 
 public class MedicalRecordController : Controller
 {
     private readonly ApplicationDbContext _context;
+    private readonly PdfService _pdfService;
+    private readonly ICompositeViewEngine _viewEngine;
 
-    public MedicalRecordController(ApplicationDbContext context)
+
+    public MedicalRecordController(ApplicationDbContext context, PdfService pdfService, ICompositeViewEngine viewEngine)
     {
         _context = context;
+        _pdfService = pdfService;
+        _viewEngine = viewEngine;
     }
+
 
     // List all medical records for a specific patient, This is unused I'll get to this sometime
     public async Task<IActionResult> Index()
@@ -154,4 +165,67 @@ public class MedicalRecordController : Controller
 
         return View(record); // Return the details view with the record
     }
+
+    private MedicalRecord GetMedicalRecordById(int id)
+    {
+        var record = _context.MedicalRecords
+            .Include(m => m.Patient)
+            .FirstOrDefault(m => m.Id == id);
+
+        if (record == null)
+        {
+            throw new KeyNotFoundException($"Medical record with ID {id} not found.");
+        }
+
+        return record;
+    }
+
+
+
+    [HttpGet]
+    public IActionResult Print(int id)
+    {
+        var medicalRecord = GetMedicalRecordById(id);
+
+        if (medicalRecord == null)
+        {
+            return NotFound(); // Handle the case where the record is not found
+        }
+
+        // Render the details view to string
+        var renderedView = RenderViewToString("PrintMedicalRecord", medicalRecord);
+        return Content(renderedView, "text/html");
+    }
+
+
+    private string RenderViewToString(string viewName, object model)
+    {
+        ViewData.Model = model;
+        using (var sw = new StringWriter())
+        {
+            // Find the view using just the view name
+            var viewResult = _viewEngine.FindView(ControllerContext, viewName, false);
+
+            // Check if the view was found
+            if (viewResult.View == null)
+            {
+                throw new InvalidOperationException($"View '{viewName}' not found. Check the view name and ensure it exists.");
+            }
+
+            var viewContext = new ViewContext(
+                ControllerContext,
+                viewResult.View,
+                ViewData,
+                TempData,
+                sw,
+                new HtmlHelperOptions()
+            );
+
+            // Render the view
+            viewResult.View.RenderAsync(viewContext).GetAwaiter().GetResult();
+            return sw.ToString();
+        }
+    }
+
+
 }

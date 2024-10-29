@@ -6,7 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
-using PatientManagementSystem.Data;
+using DinkToPdf.Contracts;
+using DinkToPdf;
 
 public class Program
 {
@@ -27,12 +28,12 @@ public class Program
         });
 
         builder.Services.AddHttpContextAccessor();
-        builder.Services.AddScoped<DatabaseSeeder>();
+
+        builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+        builder.Services.AddScoped<PdfService>();
 
         var app = builder.Build();
 
-        // Seed the database asynchronously
-        SeedDatabase(app).GetAwaiter().GetResult(); // Ensure the application waits for the seeding to complete
 
         if (app.Environment.IsDevelopment())
         {
@@ -54,14 +55,5 @@ public class Program
             pattern: "{controller=Home}/{action=Index}/{id?}");
 
         app.Run();
-    }
-
-    private static async Task SeedDatabase(WebApplication app)
-    {
-        using (var scope = app.Services.CreateScope())
-        {
-            var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
-            await seeder.SeedAsync(); // Call SeedAsync asynchronously
-        }
     }
 }
