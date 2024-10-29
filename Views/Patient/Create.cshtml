@@ -1,31 +1,28 @@
 ﻿@using PatientManagementSystem.ViewModels
 @model PatientManagementSystem.ViewModels.PatientViewModel
-@{
-    ViewData["HideFooter"] = true;
-
-}
 
 <div class="container mx-auto px-4 py-6">
     <h2 class="text-3xl font-bold text-stromboli mb-4">Create Patient</h2>
 
+    <!-- Patient Creation Form -->
     <form asp-action="Create" method="post" class="bg-white shadow-md rounded-lg p-6 max-w-3xl mx-auto">
         @Html.AntiForgeryToken()
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="mb-4">
-                <label asp-for="FullName" class="block text-sm font-medium text-gray-700"></label>
+                <label asp-for="FullName" class="block text-sm font-medium text-gray-700">Full Name</label>
                 <input asp-for="FullName" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
                 <span asp-validation-for="FullName" class="text-red-500 text-sm"></span>
             </div>
 
             <div class="mb-4">
-                <label asp-for="DateOfBirth" class="block text-sm font-medium text-gray-700"></label>
+                <label asp-for="DateOfBirth" class="block text-sm font-medium text-gray-700">Date of Birth</label>
                 <input asp-for="DateOfBirth" type="date" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
                 <span asp-validation-for="DateOfBirth" class="text-red-500 text-sm"></span>
             </div>
 
             <div class="mb-4">
-                <label asp-for="Address" class="block text-sm font-medium text-gray-700"></label>
+                <label asp-for="Address" class="block text-sm font-medium text-gray-700">Address</label>
                 <input asp-for="Address" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
                 <span asp-validation-for="Address" class="text-red-500 text-sm"></span>
             </div>
@@ -36,7 +33,7 @@
         </button>
     </form>
 
-    @if (Model.Id != 0) 
+    @if (Model.Id != 0)
     {
         <div class="mt-4">
             <h3 class="text-2xl font-semibold">Patient Created Successfully!</h3>
@@ -44,10 +41,11 @@
         </div>
 
         <h3 class="text-2xl font-semibold mt-6">Add Payment</h3>
-        <partial name="~/Views/Payment/_PaymentForm.cshtml" model="new PaymentViewModel { PatientId = Model.Id }" />
+        <partial name="~/Views/Payment/_PaymentForm.cshtml"
+                 model="new PaymentViewModel { PatientId = Model.Id }" />
 
         <h3 class="text-2xl font-semibold mt-6">Add Medical Record</h3>
-        <partial name="~/Views/MedicalRecord/_MedicalRecordForm.cshtml" model="new MedicalRecordViewModel { PatientId = Model.Id }" />
-
-         }
+        <partial name="~/Views/MedicalRecord/_MedicalRecordForm.cshtml"
+                 model="new MedicalRecordViewModel { PatientId = Model.Id }" />
+    }
 </div>

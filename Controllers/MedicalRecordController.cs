@@ -63,9 +63,9 @@ public class MedicalRecordController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateMedicalRecord(int patientId, string recordDetails)
+    public async Task<IActionResult> CreateMedicalRecord(MedicalRecordViewModel model)
     {
-        var patient = await _context.Patients.FindAsync(patientId);
+        var patient = await _context.Patients.FindAsync(model.PatientId);
         if (patient == null)
         {
             return Json(new { success = false, errors = "Patient not found." });
@@ -73,8 +73,14 @@ public class MedicalRecordController : Controller
 
         var newRecord = new MedicalRecord
         {
-            PatientId = patientId,
-            RecordDetails = recordDetails
+            PatientId = model.PatientId,
+            ReasonForVisit = model.ReasonForVisit,
+            // Other fields can be set to null or placeholders
+            RecordDetails = "N/A",
+            Allergies = "N/A",
+            BloodTestResults = "N/A",
+            PhysicalExamResults = "N/A",
+            XRayImagePath = "N/A"
         };
 
         _context.MedicalRecords.Add(newRecord);
@@ -82,6 +88,7 @@ public class MedicalRecordController : Controller
 
         return Json(new { success = true });
     }
+
 
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
@@ -100,11 +107,16 @@ public class MedicalRecordController : Controller
             Id = medicalRecord.Id,
             PatientId = medicalRecord.PatientId,
             RecordDetails = medicalRecord.RecordDetails,
-            // Add any additional properties needed for editing
+            Allergies = medicalRecord.Allergies,
+            ReasonForVisit = medicalRecord.ReasonForVisit,
+            BloodTestResults = medicalRecord.BloodTestResults,
+            PhysicalExamResults = medicalRecord.PhysicalExamResults,
+            XRayImagePath = medicalRecord.XRayImagePath // Include this if you want to show the current image
         };
 
-        return View(model); // Return the edit view with the model
+        return View(model);
     }
+
 
     [HttpPost]
     [ValidateAntiForgeryToken]

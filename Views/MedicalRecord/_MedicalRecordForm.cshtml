@@ -7,13 +7,13 @@
         @Html.AntiForgeryToken()
         <input type="hidden" asp-for="PatientId" />
         <div class="mb-4">
-            <label asp-for="RecordDetails" class="block text-sm font-medium text-gray-700"></label>
-            <textarea asp-for="RecordDetails" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
-            <span asp-validation-for="RecordDetails" class="text-red-500 text-sm"></span>
+            <label asp-for="ReasonForVisit" class="block text-sm font-medium text-gray-700">Reason for Visit</label>
+            <textarea asp-for="ReasonForVisit" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
+            <span asp-validation-for="ReasonForVisit" class="text-red-500 text-sm"></span>
         </div>
 
         <button type="button" class="bg-stromboli text-white font-semibold py-2 px-4 rounded-md hover:bg-stromboli mt-4" onclick="submitMedicalRecordForm();">
-            Add Medical Record
+            Add Reason for Visit
         </button>
     </form>
 </div>
@@ -29,11 +29,12 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    window.location.href = '@Url.Action("Index", "Patient")'; 
+                    window.location.href = '@Url.Action("Index", "Patient")';
                 } else {
                     console.log(data.errors);
                 }
             })
             .catch(error => console.error('Error:', error));
     }
+
 </script>

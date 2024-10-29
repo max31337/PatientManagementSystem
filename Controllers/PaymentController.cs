@@ -48,8 +48,8 @@ public class PaymentController : Controller
             {
                 PatientId = patientId,
                 Amount = paymentViewModel.Amount,
-                PaymentDate = paymentViewModel.PaymentDate,
-                IsPaid = paymentViewModel.IsPaid 
+                PaymentDate = DateTime.Now, // Set to current date and time
+                IsPaid = paymentViewModel.IsPaid
             };
 
             _context.Payments.Add(payment);
@@ -58,7 +58,11 @@ public class PaymentController : Controller
             return Json(new { success = true });
         }
 
-        return Json(new { success = false, errors = ModelState.Values.SelectMany(v => v.Errors.Select(e => e.ErrorMessage)).ToArray() });
+        return Json(new
+        {
+            success = false,
+            errors = ModelState.Values.SelectMany(v => v.Errors.Select(e => e.ErrorMessage)).ToArray()
+        });
     }
 
 }

@@ -18,33 +18,34 @@
 
         <div class="mb-4">
             <label asp-for="RecordDetails" class="block text-sm font-medium text-gray-700">Record Details</label>
-            <textarea asp-for="RecordDetails" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-stromboli focus:border-stromboli"></textarea>
+            <textarea asp-for="RecordDetails" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-stromboli focus:border-stromboli">@Model.RecordDetails</textarea>
             <span asp-validation-for="RecordDetails" class="text-red-600 text-sm"></span>
         </div>
 
         <div class="mb-4">
             <label asp-for="Allergies" class="block text-sm font-medium text-gray-700">Allergies</label>
-            <input asp-for="Allergies" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-stromboli focus:border-stromboli" />
+            <input asp-for="Allergies" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-stromboli focus:border-stromboli" value="@Model.Allergies" />
             <span asp-validation-for="Allergies" class="text-red-600 text-sm"></span>
         </div>
 
         <div class="mb-4">
             <label asp-for="ReasonForVisit" class="block text-sm font-medium text-gray-700">Reason for Visit</label>
-            <input asp-for="ReasonForVisit" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-stromboli focus:border-stromboli" />
+            <input asp-for="ReasonForVisit" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-stromboli focus:border-stromboli" value="@Model.ReasonForVisit" />
             <span asp-validation-for="ReasonForVisit" class="text-red-600 text-sm"></span>
         </div>
 
         <div class="mb-4">
             <label asp-for="BloodTestResults" class="block text-sm font-medium text-gray-700">Blood Test Results</label>
-            <textarea asp-for="BloodTestResults" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-stromboli focus:border-stromboli"></textarea>
+            <textarea asp-for="BloodTestResults" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-stromboli focus:border-stromboli">@Model.BloodTestResults</textarea>
             <span asp-validation-for="BloodTestResults" class="text-red-600 text-sm"></span>
         </div>
 
         <div class="mb-4">
             <label asp-for="PhysicalExamResults" class="block text-sm font-medium text-gray-700">Physical Exam Results</label>
-            <textarea asp-for="PhysicalExamResults" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-stromboli focus:border-stromboli"></textarea>
+            <textarea asp-for="PhysicalExamResults" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-stromboli focus:border-stromboli">@Model.PhysicalExamResults</textarea>
             <span asp-validation-for="PhysicalExamResults" class="text-red-600 text-sm"></span>
         </div>
+
 
         <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700">Upload X-Ray Image</label>

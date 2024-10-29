@@ -29,26 +29,33 @@ public class PatientController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(PatientViewModel model)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            var patient = new Patient
-            {
-                FullName = model.FullName,
-                DateOfBirth = model.DateOfBirth,
-                Address = model.Address,
-            };
-
-            _context.Patients.Add(patient);
-            await _context.SaveChangesAsync();
-
-            model.Id = patient.Id;
-
+            // Return the view with validation messages if the model is invalid
             return View(model);
-
         }
 
+        // Map the ViewModel to the Patient model
+        var patient = new Patient
+        {
+            FullName = model.FullName,
+            DateOfBirth = model.DateOfBirth,
+            Address = model.Address
+        };
+
+        // Save to the database
+        _context.Patients.Add(patient);
+        await _context.SaveChangesAsync();
+
+        // Assign the generated patient ID to the ViewModel for display
+        model.Id = patient.Id;
+
+        // Display success message and patient ID
         return View(model);
     }
+
+
+
 
     public async Task<IActionResult> Edit(int id)
     {
