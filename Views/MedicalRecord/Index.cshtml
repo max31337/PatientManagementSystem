@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<PatientManagementSystem.ViewModels.MedicalRecordViewModel>
 @{
     ViewData["HideFooter"] = true;
-
 }
 
 <div class="container mx-auto px-4 py-6">
@@ -32,14 +31,13 @@
                 {
                     <tr class="border-b hover:bg-gray-100">
                         <td class="py-2 px-4">@record.PatientId</td>
+                        <td class="py-2 px-4">@record.ReasonForVisit</td>
                         <td class="py-2 px-4">
-                            @record.ReasonForVisit
                             @Html.ActionLink("Details", "Details", "MedicalRecord", new { id = record.Id }, new { @class = "text-stromboli hover:underline" })
                         </td>
                     </tr>
                 }
             }
         </tbody>
-
     </table>
 </div>
