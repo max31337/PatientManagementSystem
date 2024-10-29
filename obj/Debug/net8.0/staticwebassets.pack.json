@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\images\\patientreg.png"
     },
     {
+      "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\images\\xray1.jpg",
+      "PackagePath": "staticwebassets\\images\\xray1.jpg"
+    },
+    {
       "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

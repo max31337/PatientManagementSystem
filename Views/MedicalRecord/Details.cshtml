@@ -1,1 +1,36 @@
-﻿<!-- THIS IS FOR EDITING OF MEDICAL RECORD AFTER INTEGRATION -->
+﻿@model MedicalRecord
+
+@{
+    ViewData["Title"] = "Medical Record Details";
+}
+
+<div class="container mx-auto px-4 py-6">
+    <h2 class="text-3xl font-bold text-stromboli mb-4">Medical Record Details</h2>
+
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <h3 class="text-xl font-semibold">Patient Information</h3>
+        <p><strong>Name:</strong> @Model.Patient.FullName</p>
+        <p><strong>Address:</strong> @Model.Patient.Address</p>
+        <p><strong>Allergies:</strong> @Model.Allergies</p>
+        <p><strong>Reason for Visit:</strong> @Model.ReasonForVisit</p>
+
+        <h3 class="text-xl font-semibold mt-4">Test Results</h3>
+        <p><strong>Blood Test Results:</strong> @Model.BloodTestResults</p>
+        <p><strong>Physical Exam Results:</strong> @Model.PhysicalExamResults</p>
+
+        <h3 class="text-xl font-semibold mt-4">X-Ray Image</h3>
+        @if (!string.IsNullOrEmpty(Model.XRayImagePath))
+        {
+            <img src="@Url.Content(Model.XRayImagePath)" alt="X-Ray Image" class="w-full max-w-md" />
+        }
+        else
+        {
+            <p>No X-Ray image available.</p>
+        }
+
+        <h3 class="text-xl font-semibold mt-4">Record Details</h3>
+        <p>@Model.RecordDetails</p>
+
+        <a href="@Url.Action("Edit", "MedicalRecord", new { id = Model.Id })" class="mt-4 inline-block bg-stromboli text-white px-4 py-2 rounded">Edit Record</a>
+    </div>
+</div>

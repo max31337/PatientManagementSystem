@@ -1,5 +1,4 @@
-﻿@model IEnumerable<MedicalRecord>
-
+﻿@model IEnumerable<PatientManagementSystem.ViewModels.MedicalRecordViewModel>
 @{
     ViewData["HideFooter"] = true;
 
@@ -11,14 +10,20 @@
         <thead class="bg-stromboli">
             <tr class="text-white">
                 <th class="py-3 px-4 text-left">Patient ID</th>
-                <th class="py-3 px-4 text-left">Record Details</th>
+                <th class="py-3 px-4 text-left">Reason for visit</th>
+                <th class="py-3 px-4 text-left">Actions</th>
             </tr>
         </thead>
         <tbody>
+
+            <div>
+                <strong>Records Count: @Model.Count()</strong>
+            </div>
+
             @if (Model == null || !Model.Any())
             {
                 <tr>
-                    <td colspan="2" class="text-center py-4">No medical records available.</td>
+                    <td colspan="3" class="text-center py-4">No medical records available.</td>
                 </tr>
             }
             else
@@ -27,10 +32,14 @@
                 {
                     <tr class="border-b hover:bg-gray-100">
                         <td class="py-2 px-4">@record.PatientId</td>
-                        <td class="py-2 px-4">@record.RecordDetails</td>
+                        <td class="py-2 px-4">
+                            @record.ReasonForVisit
+                            @Html.ActionLink("Details", "Details", "MedicalRecord", new { id = record.Id }, new { @class = "text-stromboli hover:underline" })
+                        </td>
                     </tr>
                 }
             }
         </tbody>
+
     </table>
 </div>
