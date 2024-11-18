@@ -75,18 +75,13 @@
     }
     <script>
         function updatePatientInfo() {
-            // Get the selected PatientId
             var selectedPatientId = document.querySelector('select[name="PatientId"]').value;
 
             if (selectedPatientId) {
-                // Find the option with the selected value
                 var selectedOption = document.querySelector('select[name="PatientId"] option[value="' + selectedPatientId + '"]');
-                // Get the FullName of the patient from the selected option's text
                 var patientName = selectedOption.text;
-                // Update the readonly text field with both the patient ID and name
                 document.getElementById("PatientInfo").value = "ID: " + selectedPatientId + " - " + patientName;
             } else {
-                // If no patient is selected, clear the field
                 document.getElementById("PatientInfo").value = "";
             }
         }

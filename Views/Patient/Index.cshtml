@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<PatientManagementSystem.Models.Patient>
 
 <div class="container mx-auto px-4 py-6">
-
     @if (Model == null || !Model.Any())
     {
         <div class="alert bg-red-500 text-white text-center py-4 rounded">
@@ -73,13 +72,17 @@
                     type: 'GET',
                     data: { searchTerm: searchTerm, sortBy: sortBy, sortOrder: sortOrder },
                     success: function (data) {
-                        var tableBody = $('#patientTable tbody');
-                        tableBody.empty(); // Clear existing table rows
+                        var tableBody = $('#patientTableBody');
+                        tableBody.empty();
+
                         $.each(data, function (i, patient) {
+                            var age = patient.age || "N/A"; // Ensure age is available
+
                             tableBody.append('<tr class="hover:bg-gray-100">' +
                                 '<td class="py-2 px-4 border-b">' + patient.id + '</td>' +
                                 '<td class="py-2 px-4 border-b">' + patient.fullName + '</td>' +
                                 '<td class="py-2 px-4 border-b">' + new Date(patient.dateOfBirth).toLocaleDateString() + '</td>' +
+                                '<td class="py-2 px-4 border-b">' + age + '</td>' +
                                 '<td class="py-2 px-4 border-b">' + patient.address + '</td>' +
                                 '<td class="py-2 px-4 border-b">' +
                                 '<a href="@Url.Action("Edit", "Patient")?id=' + patient.id + '" class="text-stromboli hover:underline">Edit</a> | ' +
@@ -91,28 +94,22 @@
                 });
             }
 
-            // Event handlers
             $('#searchInput').on('input', function () {
                 fetchPatients();
             });
 
             $('#sortSelect').on('change', function () {
-                fetchPatients('asc'); // Default to ascending when sorting
-            });
-
-            $('#filterButton').on('click', function () {
-                fetchPatients(); // Fetch based on current input
+                fetchPatients('asc');
             });
 
             $('#ascButton').on('click', function () {
-                fetchPatients('asc'); // Fetch with ascending order
+                fetchPatients('asc');
             });
 
             $('#descButton').on('click', function () {
-                fetchPatients('desc'); // Fetch with descending order
+                fetchPatients('desc');
             });
 
-            // Fetch all patients initially
             fetchPatients();
         });
     </script>

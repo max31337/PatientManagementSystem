@@ -19,6 +19,15 @@ public class MedicalRecordController : Controller
         return View(records);
     }
 
+    //Adding Medical Record for a patient, under construction
+    public IActionResult Add()
+    {
+        //logic for searching patient 
+        //for processing medical record
+        //maybe a button to redirect to labrecord creation idk
+        return View();
+    }
+
     //Lists of records of a patient
     public async Task<IActionResult> Record (int patientId)
     {
@@ -37,15 +46,6 @@ public class MedicalRecordController : Controller
             ViewData["NoMedicalRecords"] = "No medical records found for this patient.";
         }
 
-        return View(medicalRecords);
-    }
-
-    // GET: MedicalRecord/Index
-    public async Task<IActionResult> Index()
-    {
-        var medicalRecords = await _context.MedicalRecords
-                                           .Include(mr => mr.Patient)
-                                           .ToListAsync();
         return View(medicalRecords);
     }
 

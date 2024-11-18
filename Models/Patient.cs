@@ -16,9 +16,7 @@ namespace PatientManagementSystem.Models
         [Required]
         public required DateTime DateOfBirth { get; set; }
         public int? Age { get; set; }
-
         public Gender Gender { get; set; }
-
         [Required]
         public required string Address { get; set; }
         public string? ContactNumber { get; set; }

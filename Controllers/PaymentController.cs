@@ -215,5 +215,35 @@ public class PaymentController : Controller
         return RedirectToAction("Index");
     }
 
+    // GET: Payments/Details/5
+    public async Task<IActionResult> Details(int id)
+    {
+        var payment = await _context.Payments
+            .Include(p => p.Patient) // Include the Patient information
+            .Where(p => p.Id == id)
+            .FirstOrDefaultAsync();
+
+        if (payment == null)
+        {
+            return NotFound();
+        }
+
+        // Create a ViewModel or pass the payment model directly to the view
+        var viewModel = new PaymentViewModel
+        {
+            Id = payment.Id,
+            PatientId = payment.PatientId,
+            FullName = $"{payment.Patient?.FirstName ?? "Unknown"} {payment.Patient?.MiddleName ?? ""} {payment.Patient?.LastName ?? "Unknown"}",
+            AmountPaid = payment.AmountPaid,
+            InvoiceNumber = payment.InvoiceNumber,
+            PaymentDate = payment.PaymentDate,
+            IsPaid = payment.IsPaid,
+            ServicesAvailed = payment.ServicesAvailed
+        };
+
+        return View(viewModel);
+    }
+
+
 
 }

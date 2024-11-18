@@ -1,0 +1,163 @@
+﻿@model PatientManagementSystem.ViewModels.PaymentViewModel
+
+@{
+    ViewData["Title"] = "Payment Details";
+    ViewData["HideFooter"] = true;
+}
+
+<div class="flex flex-col items-center">
+    <div id="invoice-content" class="card p-6 mx-auto" style="max-width: 800px; font-family: 'Arial', sans-serif;">
+        <!-- Company Information -->
+        <div class="text-center mb-6">
+            <h3 class="font-bold text-xl">Your Company Name</h3>
+            <p class="text-sm">Tax Identification Number (TIN): 123-456-789</p>
+            <p class="text-sm">Address: 1234 Company Address, City, State, Zip Code</p>
+            <p class="text-sm">Phone: (123) 456-7890 | Email: info@company.com</p>
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Title -->
+        <div class="text-center mb-6">
+            <h2 class="font-bold text-3xl">Invoice</h2>
+            <p class="text-sm">Invoice Number: @Model.InvoiceNumber</p>
+            <p class="text-sm">Payment Date: @Model.PaymentDate.ToString("yyyy-MM-dd HH:mm")</p>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="grid grid-cols-2 gap-6">
+            <!-- Patient (Invoice) Information -->
+            <div>
+                <h3 class="font-bold text-lg">Patient Information</h3>
+                <p><strong>Patient Name:</strong> @Model.FullName</p>
+            </div>
+
+            <!-- Payment Information -->
+            <div>
+                <h3 class="font-bold text-lg">Payment Information</h3>
+                <p><strong>Amount Paid:</strong> ₱@Model.AmountPaid.ToString("0.00")</p> <!-- Peso sign here -->
+                <p><strong>Payment Status:</strong> @(Model.IsPaid ? "Paid" : "Pending")</p>
+                <p><strong>Services Availed:</strong> @Model.ServicesAvailed</p>
+            </div>
+        </div>
+
+        <hr class="my-6">
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center mt-6">
+        <a href="@Url.Action("Index", "Payment")" class="btn btn-primary mt-4">Back</a>
+    </div>
+
+    <!-- Button to trigger PDF generation -->
+    <button onclick="generateInvoicePDF()" class="btn btn-success mt-4">Download Invoice as PDF</button>
+</div>
+
+
+@section Scripts {
+    <script>
+        function generateInvoicePDF() {
+            const invoiceContent = document.getElementById('invoice-content');
+
+            // Trigger the conversion to PDF using html2pdf.js with options to hide the button
+            html2pdf()
+                .from(invoiceContent)
+                .set({
+                    // Apply styles to hide the button in the PDF
+                    html2canvas: {
+                        letterRendering: true
+                    },
+                    jsPDF: {
+                        unit: "mm",
+                        format: "a4",
+                        orientation: "portrait"
+                    }
+                })
+                .save('payment_invoice.pdf');
+        }
+    </script>
+}
+
+<!-- Add custom CSS to hide the button in the PDF -->
+<style>
+    /* Center the invoice content */
+    #invoice-content {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Make the company name and details center aligned */
+    .text-center h3 {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+
+    .text-center p {
+        font-size: 14px;
+        color: #666;
+    }
+
+    /* Two-column grid layout for patient and payment info */
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    /* Styling for headings and paragraphs */
+    h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 14px;
+        margin-bottom: 8px;
+        color: #444;
+    }
+
+    .font-bold {
+        font-weight: bold;
+    }
+
+    .my-4 {
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    /* Hide the back button in the PDF */
+    .hide-for-pdf {
+        display: none !important;
+    }
+
+    /* Button styling */
+    .btn {
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        color: white;
+        text-decoration: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+    .btn-success {
+        background-color: #2ecc71;
+        color: white;
+        text-decoration: none;
+    }
+
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+</style>
+

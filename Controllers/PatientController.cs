@@ -23,12 +23,10 @@ public class PatientController : Controller
     {
         var patientsQuery = _context.Patients.AsQueryable();
 
-        // Filter by search term (both name and Patient ID)
         if (!string.IsNullOrEmpty(searchTerm))
         {
             if (int.TryParse(searchTerm, out int patientId))
             {
-                // Search by Patient ID
                 patientsQuery = patientsQuery.Where(p => p.Id == patientId);
             }
             else
@@ -121,7 +119,7 @@ public class PatientController : Controller
 
     public async Task<IActionResult> Edit(int id, PatientViewModel model)
     {
-        if (id != model.Id) // Ensure the ID matches the model's ID
+        if (id != model.Id) 
         {
             return NotFound();
         }
@@ -129,7 +127,6 @@ public class PatientController : Controller
         // Handle GET request (initial page load)
         if (Request.Method == HttpMethods.Get)
         {
-            // Find the patient entity in the database by ID
             var patient = await _context.Patients.FindAsync(id);
             if (patient == null)
             {
