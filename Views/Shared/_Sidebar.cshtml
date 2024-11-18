@@ -14,25 +14,45 @@
     <nav class="flex-1">
         <ul class="space-y-0">
             <li>
-                <a href="/Patient/Create" class="flex items-center @((currentPath == "/Patient/Create") ? "bg-stromboli text-white" : "text-stromboli") font-semibold py-2 px-4 hover:bg-downy hover:text-white transition duration-300 w-full">
+                <a href="/Home/Dashboard" class="flex items-center @(currentPath == "/Home/Dashboard" ? "bg-stromboli text-white" : "text-stromboli") font-semibold py-2 px-4 hover:bg-downy hover:text-white transition duration-300 w-full">
+                    <img src="~/images/dashboard.png" alt="Icon" class="h-6 w-6 mr-3" />
+                    Dashboard 
+                </a>
+            </li>
+            <li>
+                <a href="/Patient/Create" class="flex items-center @(currentPath == "/Patient/Create" ? "bg-stromboli text-white" : "text-stromboli") font-semibold py-2 px-4 hover:bg-downy hover:text-white transition duration-300 w-full">
                     <img src="~/images/patientreg.png" alt="Icon" class="h-6 w-6 mr-3" />
                     Patient Registration
                 </a>
             </li>
             <li>
-                <a href="/Patient" class="flex items-center @((currentPath == "/Patient") ? "bg-stromboli text-white" : "text-stromboli") font-semibold py-2 px-4 hover:bg-downy hover:text-white transition duration-300 w-full">
+                <a href="/Patient" class="flex items-center @(currentPath == "/Patient" ? "bg-stromboli text-white" : "text-stromboli") font-semibold py-2 px-4 hover:bg-downy hover:text-white transition duration-300 w-full">
                     <img src="~/images/patientrec.png" alt="Icon" class="h-6 w-6 mr-3" />
                     Patient Records
                 </a>
             </li>
             <li>
-                <a href="/Payment" class="flex items-center @((currentPath == "/Payment") ? "bg-stromboli text-white" : "text-stromboli") font-semibold py-2 px-4 hover:bg-downy hover:text-white transition duration-300 w-full">
+                <a href="/Payment" class="flex items-center @(currentPath == "/Payment" ? "bg-stromboli text-white" : "text-stromboli") font-semibold py-2 px-4 hover:bg-downy hover:text-white transition duration-300 w-full">
                     <img src="~/images/patientpayment.png" alt="Icon" class="h-9 w-9 mr-3" />
                     Patient Payments
+                    <svg class="ml-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
                 </a>
+                <!-- Only show the "Add Payment" button on the /Payment page -->
+                @if (currentPath == "/Payment") 
+                {
+                    <div id="addPaymentDropdown" class="font-semibold py-2 px-4 hover:bg-downy hover:text-white transition duration-300 w-full flex items-center">
+                        <div class="mb-4">
+                            <a href="@Url.Action("Add", "Payment")" class="text-stromboli">
+                                Add Payment
+                            </a>
+                        </div>
+                    </div>
+                }
             </li>
             <li>
-                <a href="/MedicalRecord" class="flex items-center @((currentPath == "/MedicalRecord/Index") ? "bg-stromboli text-white" : "text-stromboli") font-semibold py-2 px-4 hover:bg-downy hover:text-white transition duration-300 w-full">
+                <a href="/MedicalRecord" class="flex items-center @(currentPath == "/MedicalRecord" ? "bg-stromboli text-white" : "text-stromboli") font-semibold py-2 px-4 hover:bg-downy hover:text-white transition duration-300 w-full">
                     <img src="~/images/EMR.png" alt="Icon" class="h-6 w-6 mr-3" />
                     Electronic Medical Records
                 </a>
@@ -55,4 +75,8 @@
 
 @section Scripts {
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <script>
+        // No JavaScript needed for toggling dropdown, as it redirects to Payment page
+    </script>
 }

@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\images\\EMR.png"
     },
     {
+      "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\images\\dashboard.png",
+      "PackagePath": "staticwebassets\\images\\dashboard.png"
+    },
+    {
       "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\images\\patientpayment.png",
       "PackagePath": "staticwebassets\\images\\patientpayment.png"
     },

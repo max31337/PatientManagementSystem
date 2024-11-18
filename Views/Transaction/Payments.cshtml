@@ -1,0 +1,38 @@
+﻿@model IEnumerable<PatientManagementSystem.Models.Payment>
+
+@{
+    ViewData["Title"] = "Payments List";
+}
+
+<h2>Payments</h2>
+
+@if (!Model.Any())
+{
+    <p>No payments available for this patient.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Invoice Number</th>
+                <th>Services Availed</th>
+                <th>Amount Paid</th>
+                <th>Payment Date</th>
+                <th>Is Paid</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var payment in Model)
+            {
+                <tr>
+                    <td>@payment.InvoiceNumber</td>
+                    <td>@payment.ServicesAvailed</td>
+                    <td>@payment.AmountPaid.ToString("C")</td>
+                    <td>@payment.PaymentDate.ToShortDateString()</td>
+                    <td>@(payment.IsPaid ? "Yes" : "No")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

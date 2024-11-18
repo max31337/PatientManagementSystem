@@ -1,48 +1,100 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PatientManagementSystem.Models;
 
-public class ApplicationDbContext : DbContext
+namespace PatientManagementSystem.Data
 {
-    public DbSet<Patient> Patients { get; set; }
-    public DbSet<Payment> Payments { get; set; }
-    public DbSet<MedicalRecord> MedicalRecords { get; set; }
-    public DbSet<User> Users { get; set; }
-
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
+    public class ApplicationDbContext : DbContext
     {
-    }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Patient>()
-            .ToTable("Patients");
-
-        modelBuilder.Entity<Payment>(entity =>
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
         {
-            entity.Property(e => e.Amount)
-                .HasColumnType("decimal(18, 2");
+        }
 
-            entity.HasOne(p => p.Patient) 
-                .WithMany(p => p.Payments)
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<MedicalRecord> MedicalRecords { get; set; }
+        public DbSet<LabRecord> LabRecords { get; set; }
+        public DbSet<AllergyHistory> AllergyHistories { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Configure Patient
+            modelBuilder.Entity<Patient>()
+                .HasMany(p => p.MedicalRecords)
+                .WithOne(mr => mr.Patient)
+                .HasForeignKey(mr => mr.PatientId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Patient>()
+                .HasMany(p => p.Payments)
+                .WithOne(payment => payment.Patient)
+                .HasForeignKey(payment => payment.PatientId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure MedicalRecord
+            modelBuilder.Entity<MedicalRecord>()
+                .HasMany(mr => mr.LabRecords)
+                .WithOne(lr => lr.MedicalRecord)
+                .HasForeignKey(lr => lr.MedicalRecordId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure AllergyHistory
+            modelBuilder.Entity<AllergyHistory>()
+                .HasOne(ah => ah.Patient)
+                .WithMany()
+                .HasForeignKey(ah => ah.PatientId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure LabRecord
+            modelBuilder.Entity<LabRecord>()
+                .Property(lr => lr.TestType)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            modelBuilder.Entity<LabRecord>()
+                .Property(lr => lr.Result)
+                .IsRequired();
+
+            modelBuilder.Entity<LabRecord>()
+                .Property(lr => lr.Notes)
+                .HasMaxLength(500);
+
+            // Configure Payment
+            modelBuilder.Entity<Payment>()
+                .HasOne(p => p.Patient)
+                .WithMany(pt => pt.Payments)
                 .HasForeignKey(p => p.PatientId)
-                .OnDelete(DeleteBehavior.Cascade); 
-        });
+                .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<MedicalRecord>(entity =>
-        {
-            entity.Property(e => e.RecordDetails)
-                .IsRequired(); 
+            modelBuilder.Entity<Payment>()
+                .Property(p => p.InvoiceNumber)
+                .HasMaxLength(50)
+                .IsRequired();
 
-            entity.HasOne(m => m.Patient) 
-                .WithMany(p => p.MedicalRecords)
-                .HasForeignKey(m => m.PatientId)
-                .OnDelete(DeleteBehavior.Cascade); 
-        });
+            modelBuilder.Entity<Payment>()
+                .Property(p => p.AmountPaid)
+                .HasColumnType("decimal(18, 2)") // Precision 18, Scale 2
+                .IsRequired();
 
-        modelBuilder.Entity<User>()
-            .ToTable("Users");
+            // Configure User
+            modelBuilder.Entity<User>()
+                .Property(u => u.Username)
+                .IsRequired();
 
-        base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>()
+                .Property(u => u.Email)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.Password)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.Role)
+                .IsRequired();
+        }
     }
 }

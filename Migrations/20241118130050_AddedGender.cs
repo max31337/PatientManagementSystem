@@ -5,14 +5,14 @@
 namespace PatientManagementSystem.Migrations
 {
     /// <inheritdoc />
-    public partial class AddUserRoleToUser : Migration
+    public partial class AddedGender : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "Role",
-                table: "Users",
+                name: "Gender",
+                table: "Patients",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
@@ -22,8 +22,8 @@ namespace PatientManagementSystem.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Role",
-                table: "Users");
+                name: "Gender",
+                table: "Patients");
         }
     }
 }

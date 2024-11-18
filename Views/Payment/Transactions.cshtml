@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Payment>
+
+@{
+    ViewData["Title"] = "Payments for Patient";
+}
+
+<div class="container mx-auto px-4 py-6">
+    <!-- Display a message if no payments are found -->
+    @if (ViewData["NoPayments"] != null)
+    {
+        <!-- Display a warning message if no medical records are found -->
+        <div class="alert alert-warning bg-red-600 text-white text-center py-4 rounded">
+            @ViewData["No Payment Records"]
+            <p class="text-3xl font-bold mb-4">
+                No Payment records found for this patient.
+            </p>
+        </div>
+    }
+    else
+    {
+        <h2 class="text-3xl font-bold text-stromboli mb-4">@ViewData["FullName"]'s Payments</h2>
+
+        <!-- Display payments if found -->
+        <table class="table min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+            <thead class="bg-stromboli">
+                <tr class="text-white">
+                    <th class="py-3 px-4 text-left">Date</th>
+                    <th class="py-3 px-4 text-left">Amount</th>
+                    <th class="py-3 px-4 text-left">Details</th>
+                    <th class="py-3 px-4 text-left">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var payment in Model)
+                {
+                    <tr>
+                        <td class="py-2 px-4">@payment.PaymentDate</td>
+                        <td class="py-2 px-4">@payment.AmountPaid</td>
+                        <td class="py-2 px-4">@payment.ServicesAvailed</td>
+                        <td class="py-2 px-4 border-b">
+                            <a href="@Url.Action("Update", new { id = payment.Id })" class="text-stromboli hover:underline">Update</a> |
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+

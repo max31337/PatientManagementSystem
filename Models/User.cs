@@ -1,17 +1,25 @@
-﻿
-public class User
-{
-    public int Id { get; set; }
-    public string Username { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; } 
-    public UserRole Role { get; set; } 
-}
+﻿using System.ComponentModel.DataAnnotations;
 
-public enum UserRole
+namespace PatientManagementSystem.Models
 {
-    Admin,
-    Doctor,
-    Staff
+    public class User
+    {
+        public int Id { get; set; }
+        [Required]
+        public required string Username { get; set; }
+        [Required]
+        public required string Email { get; set; }
+        [Required]
+        public required string Password { get; set; }
+        [Required]
+        public UserRole Role { get; set; }
+    }
+
+    public enum UserRole
+    {
+        Admin,
+        Doctor
+    }
+
 }
 

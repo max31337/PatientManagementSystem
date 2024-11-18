@@ -1,20 +1,32 @@
-﻿using PatientManagementSystem.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class Payment
+namespace PatientManagementSystem.Models
 {
-    public int Id { get; set; }
+    public class Payment
+    {
+        public int Id { get; set; }
 
-    [Required]
-    [ForeignKey("Patient")]
-    public int PatientId { get; set; }
+        [Required]
+        [ForeignKey("Patient")]
+        public int PatientId { get; set; }
 
-    public decimal Amount { get; set; }
-    public DateTime PaymentDate { get; set; }
-    public bool IsPaid { get; set; }
+        [Required]
+        public required string ServicesAvailed { get; set; }
 
-    [ForeignKey("PatientId")]
-    public virtual Patient Patient { get; set; }
+        [Required]
+        public decimal AmountPaid { get; set; }
 
+        [Required]
+        public DateTime PaymentDate { get; set; }  // Make PaymentDate required if needed
+
+        public bool IsPaid { get; set; }  // Optional, set as true/false
+
+        [Required]
+        [MaxLength(50)]
+        public required string InvoiceNumber { get; set; }
+
+        // Navigation Property to Patient (automatically linked by the ForeignKey)
+        public virtual Patient? Patient { get; set; }
+    }
 }

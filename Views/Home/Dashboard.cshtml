@@ -1,52 +1,151 @@
 ﻿@{
-    ViewData["Title"] = "Patient Dashboard";
-    Layout = "_Layout";
+    ViewData["Title"] = "Dashboard";
     ViewData["HideFooter"] = true;
 }
 
-<div class="container mx-auto px-4 py-2.6">
-    <h2 class="text-3xl font-bold text-stromboli mb-4">Patient Dashboard</h2>
-    <p class="text-lg text-gray-700 mb-6">Welcome to the Patient Management System! Here you can manage patient records, payments, and more.</p>
+<div class="container mx-auto px-4 py-6">
+    <h2 class="text-3xl font-bold text-stromboli mb-6">Dashboard</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white shadow-md rounded-lg p-6 transition duration-300 transform hover:scale-105 cursor-pointer" onclick="navigateTo('PatientList')">
-            <h3 class="text-xl font-semibold text-stromboli mb-2">View Patient List</h3>
-            <p class="text-gray-600">Access the list of all registered patients.</p>
+    <!-- Charts Row -->
+    <div class="charts-row" style="display: flex; justify-content: space-between; gap: 20px;">
+
+        <!-- Gender Distribution Pie Chart -->
+        <div class="chart-container" style="flex: 0 0 30%; min-width: 270px; text-align: center;">
+            <h3 class="font-bold mb-4">Gender Distribution</h3>
+            <canvas id="genderChart"></canvas>
         </div>
-        <div class="bg-white shadow-md rounded-lg p-6 transition duration-300 transform hover:scale-105 cursor-pointer" onclick="navigateTo('CreatePatient')">
-            <h3 class="text-xl font-semibold text-stromboli mb-2">Add New Patient</h3>
-            <p class="text-gray-600">Register a new patient into the system.</p>
+
+
+        <!-- Age Distribution Bar Chart -->
+        <div class="chart-container" style="flex: 0 0 33%; min-width: 300px; text-align: center;">
+            <h3 class="font-bold mb-4">Age Distribution</h3>
+            <canvas id="ageChart"></canvas>
         </div>
-        <div class="bg-white shadow-md rounded-lg p-6 transition duration-300 transform hover:scale-105 cursor-pointer" onclick="navigateTo('ManagePayments')">
-            <h3 class="text-xl font-semibold text-stromboli mb-2">Manage Payments</h3>
-            <p class="text-gray-600">View and manage patient payment records.</p>
+
+        <!-- Minors, Adults, Seniors Distribution Chart -->
+        <div class="chart-container" style="flex: 0 0 33%; min-width: 300px; text-align: center;">
+            <h3 class="font-bold mb-4">Age Categories</h3>
+            <canvas id="ageCategoryChart"></canvas>
         </div>
-        <div class="bg-white shadow-md rounded-lg p-6 transition duration-300 transform hover:scale-105 cursor-pointer" onclick="navigateTo('ViewMedicalRecords')">
-            <h3 class="text-xl font-semibold text-stromboli mb-2">View Medical Records</h3>
-            <p class="text-gray-600">Access and manage patients' medical records.</p>
-        </div>
+
     </div>
 </div>
 
 @section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        function navigateTo(feature) {
-            switch (feature) {
-                case 'PatientList':
-                    window.location.href = '@Url.Action("Index", "Patient")';
-                    break;
-                case 'CreatePatient':
-                    window.location.href = '@Url.Action("Create", "Patient")';
-                    break;
-                case 'ManagePayments':
-                    window.location.href = '@Url.Action("Index", "Payment")';
-                    break;
-                case 'ViewMedicalRecords':
-                    window.location.href = '@Url.Action("Index", "MedicalRecord")';
-                    break;
-                default:
-                    break;
+        // Gender Distribution Pie Chart
+        var genderData = @Html.Raw(Json.Serialize(ViewBag.GenderCount));
+        console.log(genderData); // Debugging: Check the output structure
+
+        var genderChart = new Chart(document.getElementById('genderChart').getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: Object.keys(genderData), // Get keys from dictionary (e.g., Male, Female)
+                datasets: [{
+                    label: 'Gender Distribution',
+                    data: Object.values(genderData), // Get values from dictionary (e.g., counts)
+                    backgroundColor: ['#36A2EB', '#FF6384', '#FFCD56'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw;
+                            }
+                        }
+                    }
+                }
             }
-        }
+        });
+
+        // Age Distribution Bar Chart
+        var ageGroups = @Html.Raw(Json.Serialize(ViewBag.AgeGroups));
+
+        var ageChart = new Chart(document.getElementById('ageChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: Object.keys(ageGroups),  // Age groups on X-axis
+                datasets: [{
+                    label: 'Age Distribution',
+                    data: Object.values(ageGroups),  // Counts for each age group
+                    backgroundColor: '#FF6384',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Age Groups'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Number of Patients'
+                        },
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Age Categories Chart (Minors, Adults, Seniors)
+        var ageCategoryData = @Html.Raw(Json.Serialize(ViewBag.AgeCategories));
+
+        var ageCategoryChart = new Chart(document.getElementById('ageCategoryChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: Object.keys(ageCategoryData),
+                datasets: [{
+                    label: 'Age Categories',
+                    data: Object.values(ageCategoryData),
+                    backgroundColor: ['#36A2EB', '#FF6384', '#FFCD56'], // Different colors for each category
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false, // Hide the legend
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Categories' // Label for the X axis
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Number of Patients' // Label for the Y axis
+                        },
+                        beginAtZero: true // Ensure the Y axis starts at 0
+                    }
+                }
+            }
+        });
     </script>
 }

@@ -58,8 +58,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNhbFJlY29yZFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/navar/source/repos/PatientManagementSystem/Views/MedicalRecord/_MedicalRecordForm.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNhbFJlY29yZFxfTWVkaWNhbFJlY29yZEZvcm0uY3NodG1s
+[C:/Users/navar/source/repos/PatientManagementSystem/Views/MedicalRecord/Record.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNhbFJlY29yZFxSZWNvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/navar/source/repos/PatientManagementSystem/Views/Patient/Create.cshtml]
@@ -78,16 +78,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/navar/source/repos/PatientManagementSystem/Views/Payment/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxEZXRhaWxzLmNzaHRtbA==
+[C:/Users/navar/source/repos/PatientManagementSystem/Views/Payment/Add.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxBZGQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/navar/source/repos/PatientManagementSystem/Views/Payment/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/navar/source/repos/PatientManagementSystem/Views/Payment/_PaymentForm.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxfUGF5bWVudEZvcm0uY3NodG1s
+[C:/Users/navar/source/repos/PatientManagementSystem/Views/Payment/Transactions.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxUcmFuc2FjdGlvbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/navar/source/repos/PatientManagementSystem/Views/Payment/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/navar/source/repos/PatientManagementSystem/Views/Shared/Error.cshtml]
@@ -104,6 +108,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/navar/source/repos/PatientManagementSystem/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/navar/source/repos/PatientManagementSystem/Views/Transaction/Payments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhbnNhY3Rpb25cUGF5bWVudHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/navar/source/repos/PatientManagementSystem/Views/_ViewImports.cshtml]

@@ -1,0 +1,94 @@
+﻿@model PatientManagementSystem.ViewModels.PaymentViewModel
+
+<div class="container mx-auto px-4 py-6">
+    <h2 class="text-3xl font-bold text-stromboli mb-6">Add Payment</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success bg-green-500 text-white py-2 px-4 rounded-md mb-4">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<form asp-action="Add" method="post" class="bg-white p-6 rounded-lg shadow-lg">
+    <div class="form-group mb-4">
+        <label for="PatientId" class="block text-gray-700 font-semibold">Select Patient:</label>
+        <select asp-for="PatientId" asp-items="ViewBag.PatientDropdown" class="form-control mt-2 p-2 border border-gray-300 rounded-md w-full" required onchange="updatePatientInfo()">
+            <option value="">-- Select a Patient --</option>
+        </select>
+        <span asp-validation-for="PatientId" class="text-danger text-red-500 text-sm"></span>
+    </div>
+
+    <!-- Display selected patient's ID and Name in a readonly field -->
+    <div class="form-group mt-3">
+        <label for="PatientInfo">Selected Patient (ID and Name):</label>
+        <input type="text" id="PatientInfo" class="form-control" readonly />
+    </div>
+
+    <div class="form-group mt-4">
+        <label for="ServicesAvailed" class="block text-gray-700 font-semibold">Services Availed:</label>
+        <input asp-for="ServicesAvailed" class="form-control mt-2 p-2 border border-gray-300 rounded-md w-full" id="ServicesAvailed" name="ServicesAvailed" required />
+        <span asp-validation-for="ServicesAvailed" class="text-red-500 text-sm"></span>
+    </div>
+
+    <div class="form-group mt-4">
+        <label for="AmountPaid" class="block text-gray-700 font-semibold">Amount Paid:</label>
+        <input asp-for="AmountPaid" class="form-control mt-2 p-2 border border-gray-300 rounded-md w-full" id="AmountPaid" name="AmountPaid" type="number" step="0.01" required />
+        <span asp-validation-for="AmountPaid" class="text-red-500 text-sm"></span>
+    </div>
+
+    <div class="form-group mt-4">
+        <label for="InvoiceNumber" class="block text-gray-700 font-semibold">Invoice Number:</label>
+        <input asp-for="InvoiceNumber" class="form-control mt-2 p-2 border border-gray-300 rounded-md w-full" id="InvoiceNumber" name="InvoiceNumber" maxlength="50" required />
+        <span asp-validation-for="InvoiceNumber" class="text-red-500 text-sm"></span>
+    </div>
+
+    <div class="form-group mt-4">
+        <label for="PaymentDate" class="block text-gray-700 font-semibold">Payment Date:</label>
+        <input asp-for="PaymentDate" class="form-control mt-2 p-2 border border-gray-300 rounded-md w-full" id="PaymentDate" name="PaymentDate" type="date" required />
+        <span asp-validation-for="PaymentDate" class="text-red-500 text-sm"></span>
+    </div>
+
+
+    <div class="form-group mt-4">
+        <label for="IsPaid" class="block text-gray-700 font-semibold">Payment Status:</label>
+        <select asp-for="IsPaid" class="form-control mt-2 p-2 border border-gray-300 rounded-md w-full" id="IsPaid" name="IsPaid">
+            <option value="true">Paid</option>
+            <option value="false">Pending</option>
+        </select>
+    </div>
+
+    <div class="flex justify-between mt-6">
+        <button type="submit" class="bg-stromboli text-white font-semibold py-2 px-6 rounded-md hover:bg-stromboli-dark transition duration-300">
+            Submit Payment
+        </button>
+        <a asp-controller="Payment" asp-action="Index" class="bg-gray-300 text-gray-700 font-semibold py-2 px-6 rounded-md hover:bg-gray-400 transition duration-300">
+            Cancel
+        </a>
+    </div>
+</form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        function updatePatientInfo() {
+            // Get the selected PatientId
+            var selectedPatientId = document.querySelector('select[name="PatientId"]').value;
+
+            if (selectedPatientId) {
+                // Find the option with the selected value
+                var selectedOption = document.querySelector('select[name="PatientId"] option[value="' + selectedPatientId + '"]');
+                // Get the FullName of the patient from the selected option's text
+                var patientName = selectedOption.text;
+                // Update the readonly text field with both the patient ID and name
+                document.getElementById("PatientInfo").value = "ID: " + selectedPatientId + " - " + patientName;
+            } else {
+                // If no patient is selected, clear the field
+                document.getElementById("PatientInfo").value = "";
+            }
+        }
+    </script>
+}

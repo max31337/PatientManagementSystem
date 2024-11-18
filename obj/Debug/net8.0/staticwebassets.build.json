@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "eo6Gr/CnQuzEJARRZDiaHACwrD4L6MpJLZmnt3pa32E=",
+  "Hash": "2fOtiIUctJKDO0b5suo6HWFr5AP04WVFHTm/8WxPOLA=",
   "Source": "PatientManagementSystem",
   "BasePath": "_content/PatientManagementSystem",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\images\\dashboard.png",
+      "SourceId": "PatientManagementSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\",
+      "BasePath": "_content/PatientManagementSystem",
+      "RelativePath": "images/dashboard.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\dashboard.png"
     },
     {
       "Identity": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\images\\EMR.png",

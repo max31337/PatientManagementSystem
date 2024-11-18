@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PatientManagementSystem.Models;
-using System.Linq;
-using System.Threading.Tasks;
+using PatientManagementSystem.Data;
+using Microsoft.EntityFrameworkCore;
 
 public class MedicalRecordController : Controller
 {
@@ -15,37 +15,30 @@ public class MedicalRecordController : Controller
     // List all medical records for a specific patient
     public async Task<IActionResult> Index(int patientId)
     {
-        var records = _context.MedicalRecords.ToList(); // Adjust as needed
+        var records = await _context.MedicalRecords.ToListAsync(); 
         return View(records);
     }
 
-    // Render the form to create a new medical record for a patient
-    public IActionResult Create(int patientId)
-    {
-        ViewBag.PatientId = patientId; // Pass patient ID to the view
-        return View();
-    }
 
-    // Handle form submission to create a new medical record (AJAX)
-    [HttpPost]
-    public async Task<IActionResult> CreateMedicalRecord(int patientId, string recordDetails)
+    public async Task<IActionResult> Record (int patientId)
     {
-        var patient = await _context.Patients.FindAsync(patientId);
-        if (patient == null)
+        // Retrieve the patient's information
+        var patient = await _context.Patients
+            .Where(p => p.Id == patientId)
+            .FirstOrDefaultAsync();
+
+        ViewData["FullName"] = patient!.FullName;
+
+        var medicalRecords = await _context.MedicalRecords
+            .Where(m => m.PatientId == patientId)
+            .ToListAsync();
+
+        if (medicalRecords == null || !medicalRecords.Any())
         {
-            return Json(new { success = false, errors = "Patient not found." }); // Return JSON error
+            ViewData["NoMedicalRecords"] = "No medical records found for this patient.";
         }
 
-        var newRecord = new MedicalRecord
-        {
-            PatientId = patientId,
-            RecordDetails = recordDetails
-        };
-
-        _context.MedicalRecords.Add(newRecord);
-        await _context.SaveChangesAsync();
-
-        // Return success response
-        return Json(new { success = true });
+        return View(medicalRecords);
     }
+
 }

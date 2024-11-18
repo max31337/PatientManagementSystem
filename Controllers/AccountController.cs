@@ -2,7 +2,8 @@
 using PatientManagementSystem.ViewModels;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
+using PatientManagementSystem.Data;
+using PatientManagementSystem.Models;
 
 public class AccountController : Controller
 {

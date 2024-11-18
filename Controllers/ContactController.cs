@@ -5,8 +5,14 @@ public class ContactController : Controller
 {
     public IActionResult Index()
     {
-        return View(new ContactViewModel());
+        return View(new ContactViewModel
+        {
+            Name = string.Empty,
+            Email = string.Empty,
+            Message = string.Empty
+        });
     }
+
 
     [HttpPost]
     [ValidateAntiForgeryToken]

@@ -1,0 +1,61 @@
+﻿@model PatientManagementSystem.ViewModels.PaymentViewModel
+
+<h2>Update Payment</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<form asp-action="Update" method="post">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="PatientId" />
+
+    <!-- Display the patient info -->
+    <div class="form-group mt-3">
+        <label for="PatientInfo">Selected Patient (ID and Name):</label>
+        <input type="text" id="PatientInfo" class="form-control" readonly
+               value="ID: @Model.PatientId - @Model.FullName" />
+    </div>
+
+    <!-- Services Availed -->
+    <div class="form-group mt-3">
+        <label for="ServicesAvailed">Services Availed:</label>
+        <input asp-for="ServicesAvailed" class="form-control" id="ServicesAvailed" required />
+        <span asp-validation-for="ServicesAvailed" class="text-danger"></span>
+    </div>
+
+    <!-- Amount Paid -->
+    <div class="form-group mt-3">
+        <label for="AmountPaid">Amount Paid:</label>
+        <input asp-for="AmountPaid" class="form-control" id="AmountPaid" type="number" step="0.01" required />
+        <span asp-validation-for="AmountPaid" class="text-danger"></span>
+    </div>
+
+    <!-- Invoice Number -->
+    <div class="form-group mt-3">
+        <label for="InvoiceNumber">Invoice Number:</label>
+        <input asp-for="InvoiceNumber" class="form-control" id="InvoiceNumber" maxlength="50" required />
+        <span asp-validation-for="InvoiceNumber" class="text-danger"></span>
+    </div>
+
+    <!-- Payment Date -->
+    <div class="form-group mt-3">
+        <label for="PaymentDate">Payment Date:</label>
+        <input asp-for="PaymentDate" class="form-control" type="date" required />
+        <span asp-validation-for="PaymentDate" class="text-danger"></span>
+    </div>
+
+    <!-- Payment Status (Dropdown) -->
+    <div class="form-group">
+        <label for="IsPaid">Payment Status:</label>
+        <select asp-for="IsPaid" asp-items="ViewBag.PaymentStatus" class="form-control" required>
+            <option value="">-- Select Payment Status --</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-4">Update Payment</button>
+    <a asp-controller="Payments" asp-action="Index" class="btn btn-secondary mt-4">Cancel</a>
+</form>
