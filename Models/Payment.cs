@@ -20,13 +20,13 @@ namespace PatientManagementSystem.Models
         [Required]
         public DateTime PaymentDate { get; set; }  // Make PaymentDate required if needed
 
-        public bool IsPaid { get; set; }  // Optional, set as true/false
+        public bool IsPaid { get; set; } 
 
         [Required]
         [MaxLength(50)]
         public required string InvoiceNumber { get; set; }
 
-        // Navigation Property to Patient (automatically linked by the ForeignKey)
+        // Navigation Property 
         public virtual Patient? Patient { get; set; }
     }
 }

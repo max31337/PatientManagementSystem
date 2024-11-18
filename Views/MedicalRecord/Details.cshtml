@@ -1,1 +1,36 @@
-﻿<!-- THIS IS FOR EDITING OF MEDICAL RECORD AFTER INTEGRATION -->
+﻿@model PatientManagementSystem.Models.MedicalRecord
+
+@{
+    ViewData["Title"] = "Medical Record Details";
+}
+
+<h2 class="text-3xl font-bold mb-4">Medical Record Details</h2>
+
+<div>
+    <h3 class="font-bold mb-2">Patient: @Model.Patient.FullName</h3>
+    <p><strong>Doctor:</strong> @Model.Doctor</p>
+    <p><strong>Department:</strong> @Model.Department</p>
+    <p><strong>Record Details:</strong> @Model.RecordDetails</p>
+    <p><strong>Medical History:</strong> @Model.MedicalHistory</p>
+    <p><strong>Current Medications:</strong> @Model.CurrentMedications</p>
+    <p><strong>Notes:</strong> @Model.Notes</p>
+    <p><strong>Created At:</strong> @Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
+    <p><strong>Updated At:</strong> @Model.UpdatedAt.ToString("yyyy-MM-dd HH:mm")</p>
+
+    <h4 class="mt-4">Lab Records</h4>
+    @if (Model.LabRecords.Any())
+    {
+        <ul>
+            @foreach (var labRecord in Model.LabRecords)
+            {
+                <li>@labRecord.TestType - @labRecord.CreatedAt.ToString("yyyy-MM-dd HH:mm")</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No lab records available for this medical record.</p>
+    }
+
+    <a href="@Url.Action("Index", "MedicalRecord")" class="btn btn-primary mt-4">Back to List</a>
+</div>

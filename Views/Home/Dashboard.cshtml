@@ -36,15 +36,15 @@
     <script>
         // Gender Distribution Pie Chart
         var genderData = @Html.Raw(Json.Serialize(ViewBag.GenderCount));
-        console.log(genderData); // Debugging: Check the output structure
+        console.log(genderData);
 
         var genderChart = new Chart(document.getElementById('genderChart').getContext('2d'), {
             type: 'pie',
             data: {
-                labels: Object.keys(genderData), // Get keys from dictionary (e.g., Male, Female)
+                labels: Object.keys(genderData),
                 datasets: [{
                     label: 'Gender Distribution',
-                    data: Object.values(genderData), // Get values from dictionary (e.g., counts)
+                    data: Object.values(genderData), 
                     backgroundColor: ['#36A2EB', '#FF6384', '#FFCD56'],
                     borderWidth: 1
                 }]
@@ -72,10 +72,10 @@
         var ageChart = new Chart(document.getElementById('ageChart').getContext('2d'), {
             type: 'bar',
             data: {
-                labels: Object.keys(ageGroups),  // Age groups on X-axis
+                labels: Object.keys(ageGroups),  
                 datasets: [{
                     label: 'Age Distribution',
-                    data: Object.values(ageGroups),  // Counts for each age group
+                    data: Object.values(ageGroups),  
                     backgroundColor: '#FF6384',
                     borderWidth: 1
                 }]
@@ -119,7 +119,7 @@
                 datasets: [{
                     label: 'Age Categories',
                     data: Object.values(ageCategoryData),
-                    backgroundColor: ['#36A2EB', '#FF6384', '#FFCD56'], // Different colors for each category
+                    backgroundColor: ['#36A2EB', '#FF6384', '#FFCD56'], 
                     borderWidth: 1
                 }]
             },
@@ -127,22 +127,22 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        display: false, // Hide the legend
+                        display: false, 
                     }
                 },
                 scales: {
                     x: {
                         title: {
                             display: true,
-                            text: 'Categories' // Label for the X axis
+                            text: 'Categories' 
                         }
                     },
                     y: {
                         title: {
                             display: true,
-                            text: 'Number of Patients' // Label for the Y axis
+                            text: 'Number of Patients' 
                         },
-                        beginAtZero: true // Ensure the Y axis starts at 0
+                        beginAtZero: true 
                     }
                 }
             }

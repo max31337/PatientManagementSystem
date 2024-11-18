@@ -2,11 +2,8 @@
 @inject IHttpContextAccessor HttpContextAccessor
 
 @{
-    // Retrieve username and user role from session
     var username = HttpContextAccessor.HttpContext?.Session.GetString("Username");
     var userRole = HttpContextAccessor.HttpContext?.Session.GetString("UserRole");
-
-    // Get the current URL path
     var currentPath = HttpContextAccessor.HttpContext?.Request.Path.Value;
 }
 
@@ -56,6 +53,17 @@
                     <img src="~/images/EMR.png" alt="Icon" class="h-6 w-6 mr-3" />
                     Electronic Medical Records
                 </a>
+                <!-- Only show the "Add MedicalRecord" button on the /MedicalRecord page -->
+                @if (currentPath == "/MedicalRecord")
+                {
+                    <div id="addPaymentDropdown" class="font-semibold py-2 px-4 hover:bg-downy hover:text-white transition duration-300 w-full flex items-center">
+                        <div class="mb-4">
+                            <a href="@Url.Action("Add", "MedicalRecord")" class="text-stromboli">
+                                Add MedicalRecord
+                            </a>
+                        </div>
+                    </div>
+                }
             </li>
         </ul>
     </nav>

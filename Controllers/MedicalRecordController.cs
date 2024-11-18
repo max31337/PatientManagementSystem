@@ -19,10 +19,9 @@ public class MedicalRecordController : Controller
         return View(records);
     }
 
-
+    //Lists of records of a patient
     public async Task<IActionResult> Record (int patientId)
     {
-        // Retrieve the patient's information
         var patient = await _context.Patients
             .Where(p => p.Id == patientId)
             .FirstOrDefaultAsync();
@@ -39,6 +38,36 @@ public class MedicalRecordController : Controller
         }
 
         return View(medicalRecords);
+    }
+
+    // GET: MedicalRecord/Index
+    public async Task<IActionResult> Index()
+    {
+        var medicalRecords = await _context.MedicalRecords
+                                           .Include(mr => mr.Patient)
+                                           .ToListAsync();
+        return View(medicalRecords);
+    }
+
+    // GET: MedicalRecord/Details/5
+    public async Task<IActionResult> Details(int id)
+    {
+        if (id == 0)
+        {
+            return NotFound();
+        }
+
+        var medicalRecord = await _context.MedicalRecords
+                                          .Include(mr => mr.Patient)
+                                          .Include(mr => mr.LabRecords) // I'll add this later
+                                          .FirstOrDefaultAsync(mr => mr.Id == id);
+
+        if (medicalRecord == null)
+        {
+            return NotFound();
+        }
+
+        return View(medicalRecord);
     }
 
 }

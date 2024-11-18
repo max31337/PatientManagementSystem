@@ -75,29 +75,25 @@ public class AccountController : Controller
     {
         if (ModelState.IsValid)
         {
-            // Check if passwords match
             if (model.Password != model.ConfirmPassword)
             {
                 ModelState.AddModelError(string.Empty, "Passwords do not match.");
                 return View(model);
             }
 
-            // Hash the password before saving
             var hashedPassword = HashPassword(model.Password);
 
-            // Create a new user
             var user = new User
             {
                 Email = model.Email,
                 Username = model.Username,
                 Password = hashedPassword,
-                Role = model.UserRole // Assuming you added the role in the RegisterViewModel
+                Role = model.UserRole 
             };
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            // Set session variables
             HttpContext.Session.SetString("Username", user.Username);
             HttpContext.Session.SetString("UserRole", user.Role.ToString());
 
@@ -128,7 +124,6 @@ public class AccountController : Controller
     [HttpPost]
     public IActionResult Logout()
     {
-        // Clear the session
         HttpContext.Session.Clear();
         return RedirectToAction("Index", "Home");
     }

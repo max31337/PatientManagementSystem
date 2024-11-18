@@ -38,7 +38,6 @@ public class PaymentController : Controller
 
     public async Task<IActionResult> Transactions(int patientId)
     {
-        // Retrieve the patient's information
         var patient = await _context.Patients
             .Where(p => p.Id == patientId)
             .FirstOrDefaultAsync();
@@ -47,7 +46,6 @@ public class PaymentController : Controller
 
         if (patient == null)
         {
-            // Handle the case where the patient is not found
             return NotFound();
         }
 
@@ -66,7 +64,6 @@ public class PaymentController : Controller
     // GET: Payments/Add
     public async Task<IActionResult> Add()
     {
-        // Fetch patients for the dropdown
         var patients = await _context.Patients
             .Select(p => new
             {
@@ -85,14 +82,12 @@ public class PaymentController : Controller
     {
         if (!ModelState.IsValid)
         {
-            // Log or inspect errors for debugging
             var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
             foreach (var error in errors)
             {
                 Console.WriteLine("Validation Error: " + error);
             }
 
-            // Repopulate dropdown if validation fails
             var patients = await _context.Patients
                 .Select(p => new
                 {
@@ -105,13 +100,11 @@ public class PaymentController : Controller
             return View(viewModel);
         }
 
-        // Ensure the patient exists in the database
         var patientExists = await _context.Patients.AnyAsync(p => p.Id == viewModel.PatientId);
         if (!patientExists)
         {
             ModelState.AddModelError(string.Empty, "Invalid patient selected.");
 
-            // Repopulate dropdown for the invalid case
             var patients = await _context.Patients
                 .Select(p => new
                 {
@@ -123,10 +116,6 @@ public class PaymentController : Controller
             ViewBag.PatientDropdown = new SelectList(patients, "Id", "FullName", viewModel.PatientId);
             return View(viewModel);
         }
-
-
-
-        // Map the ViewModel to the Payment model
         var payment = new Payment
         {
             PatientId = viewModel.PatientId,
@@ -143,8 +132,6 @@ public class PaymentController : Controller
             new SelectListItem { Text = "Pending", Value = "false", Selected = !payment.IsPaid }
         };
 
-
-        // Add payment record to the database
         _context.Payments.Add(payment);
         await _context.SaveChangesAsync();
 
@@ -162,17 +149,12 @@ public class PaymentController : Controller
         {
             return NotFound();
         }
-
-        // Fetch the associated patient for display
         var patient = await _context.Patients
             .FirstOrDefaultAsync(p => p.Id == payment.PatientId);
-
         if (patient == null)
         {
             return NotFound();
         }
-
-        // Create the ViewModel and pass it to the View
         var viewModel = new PaymentViewModel
         {
             Id = payment.Id,
@@ -184,8 +166,6 @@ public class PaymentController : Controller
             IsPaid = payment.IsPaid,
             ServicesAvailed = payment.ServicesAvailed
         };
-
-        // Repopulate the payment status dropdown
         var paymentStatusList = new List<SelectListItem>
     {
         new SelectListItem { Text = "Paid", Value = "true", Selected = payment.IsPaid },
@@ -208,7 +188,6 @@ public class PaymentController : Controller
 
         if (!ModelState.IsValid)
         {
-            // Repopulate the payment status dropdown if validation fails
             var paymentStatusList = new List<SelectListItem>
         {
             new SelectListItem { Text = "Paid", Value = "true", Selected = viewModel.IsPaid },
@@ -224,15 +203,12 @@ public class PaymentController : Controller
         {
             return NotFound();
         }
-
-        // Update the payment record
         payment.AmountPaid = viewModel.AmountPaid;
         payment.InvoiceNumber = viewModel.InvoiceNumber;
         payment.PaymentDate = viewModel.PaymentDate;
         payment.IsPaid = viewModel.IsPaid;
         payment.ServicesAvailed = viewModel.ServicesAvailed;
 
-        // Save the changes to the database
         await _context.SaveChangesAsync();
 
         TempData["SuccessMessage"] = "Payment successfully updated.";

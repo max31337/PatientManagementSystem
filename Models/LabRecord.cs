@@ -24,6 +24,7 @@ namespace PatientManagementSystem.Models
         public string? ImagePath { get; set; } // File path for test images (e.g., X-rays, ECGs)
 
         public DateTime TestDate { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation property
         [Required]

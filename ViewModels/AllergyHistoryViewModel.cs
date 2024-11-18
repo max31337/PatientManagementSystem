@@ -14,6 +14,6 @@ namespace PatientManagementSystem.ViewModels
 
         public string? Medications { get; set; }
 
-        public int PatientId { get; set; }  // Reference to the Adult Patient
+        public int PatientId { get; set; } 
     }
 }

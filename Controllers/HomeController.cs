@@ -23,9 +23,9 @@ public class HomeController : Controller
         return View();
     }
 
+    //These are for charts
     public IActionResult Dashboard()
     {
-        // Fetch gender count
         var genderLabels = new Dictionary<Gender, string>
     {
         { Gender.Male, "Male" },
@@ -36,23 +36,21 @@ public class HomeController : Controller
         var genderCount = _context.Patients
             .GroupBy(p => p.Gender)
             .ToDictionary(
-                g => genderLabels[g.Key], // Convert enum to string
+                g => genderLabels[g.Key], 
                 g => g.Count()
             );
 
-        // Fetch age distribution
         var ageDistribution = _context.Patients
             .Select(p => p.DateOfBirth)
             .ToList();
 
-        // Age groups by decade
         var ageGroups = new Dictionary<string, int>();
         foreach (var dob in ageDistribution)
         {
             var age = DateTime.Now.Year - dob.Year;
             if (DateTime.Now < dob.AddYears(age)) age--;
             if (age < 18) age = 18;
-            var ageGroup = $"{age / 10 * 10}s"; // Group by decades (e.g., 20s, 30s, etc.)
+            var ageGroup = $"{age / 10 * 10}s"; 
             if (!ageGroups.ContainsKey(ageGroup))
             {
                 ageGroups[ageGroup] = 0;
@@ -60,7 +58,6 @@ public class HomeController : Controller
             ageGroups[ageGroup]++;
         }
 
-        // Fetch age categories (Minors, Adults, Seniors)
         var ageCategories = new Dictionary<string, int>
     {
         { "Minors (<18)", _context.Patients.Count(p =>
@@ -78,7 +75,6 @@ public class HomeController : Controller
             (DateTime.Now < p.DateOfBirth.AddYears(DateTime.Now.Year - p.DateOfBirth.Year) ? 1 : 0) > 65) }
     };
 
-        // Pass the data to the view using ViewBag
         ViewBag.GenderCount = genderCount;
         ViewBag.AgeGroups = ageGroups;
         ViewBag.AgeCategories = ageCategories;

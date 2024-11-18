@@ -13,7 +13,7 @@ namespace PatientManagementSystem.Models
 
         [Required]
         [ForeignKey("Patient")]
-        public int PatientId { get; set; }  // Foreign key property
+        public int PatientId { get; set; } 
         [Required]
         public virtual required Patient Patient { get; set; }
     }

@@ -136,7 +136,6 @@ public class PatientController : Controller
                 return NotFound();
             }
 
-            // Map the patient entity to the view model
             var viewModel = new PatientViewModel
             {
                 Id = patient.Id,
@@ -150,7 +149,7 @@ public class PatientController : Controller
                 ContactNumber = patient.ContactNumber,
                 Occupation = patient.Occupation,
                 Employer = patient.Employer,
-                MaritalStatus = patient.MaritalStatus, // Ensure the marital status enum is passed correctly
+                MaritalStatus = patient.MaritalStatus, 
                 SpouseName = patient.SpouseName,
                 Weight = patient.Weight,
                 Height = patient.Height,
@@ -166,21 +165,17 @@ public class PatientController : Controller
                 ParentGuardianContact = patient.ParentGuardianContact
             };
 
-            // Return the view with the populated view model
             return View(viewModel);
         }
 
         // Handle POST request (form submission)
         if (ModelState.IsValid)
         {
-            // Find the patient entity in the database by ID
             var patient = await _context.Patients.FindAsync(id);
             if (patient == null)
             {
                 return NotFound();
             }
-
-            // Update patient properties from the view model
             patient.FirstName = model.FirstName;
             patient.MiddleName = model.MiddleName;
             patient.LastName = model.LastName;
@@ -191,10 +186,7 @@ public class PatientController : Controller
             patient.ContactNumber = model.ContactNumber;
             patient.Occupation = model.Occupation;
             patient.Employer = model.Employer;
-
-            // Explicitly reference the MaritalStatus enum from the view model
-            patient.MaritalStatus = (PatientManagementSystem.Models.MaritalStatus)model.MaritalStatus;
-
+            patient.MaritalStatus = model.MaritalStatus;
             patient.SpouseName = model.SpouseName;
             patient.Weight = model.Weight;
             patient.Height = model.Height;
@@ -209,15 +201,11 @@ public class PatientController : Controller
             patient.ParentGuardianName = model.ParentGuardianName;
             patient.ParentGuardianContact = model.ParentGuardianContact;
 
-            // Save changes to the database
             _context.Update(patient);
             await _context.SaveChangesAsync();
 
-            // Redirect to the Index page after successful update
             return RedirectToAction(nameof(Index));
         }
-
-        // If the model state is invalid, re-render the form
         return View(model);
     }
 
