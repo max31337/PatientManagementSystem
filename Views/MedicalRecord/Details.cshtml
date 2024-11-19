@@ -2,35 +2,54 @@
 
 @{
     ViewData["Title"] = "Medical Record Details";
+    ViewData["HideFooter"] = true;
 }
 
-<h2 class="text-3xl font-bold mb-4">Medical Record Details</h2>
+<div class="container mx-auto px-4 py-6">
+    <h2 class="text-xl font-semibold text-gray-800 mb-2">Medical Record Details</h2>
 
-<div>
-    <p><strong>Patient:</strong> @(Model.Patient != null ? Model.Patient.FullName : "N/A")</p>
-    <p><strong>Doctor:</strong> @Model.Doctor</p>
-    <p><strong>Department:</strong> @Model.Department</p>
-    <p><strong>Record Details:</strong> @Model.RecordDetails</p>
-    <p><strong>Medical History:</strong> @Model.MedicalHistory</p>
-    <p><strong>Current Medications:</strong> @Model.CurrentMedications</p>
-    <p><strong>Notes:</strong> @Model.Notes</p>
-    <p><strong>Created At:</strong> @Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
-    <p><strong>Updated At:</strong> @Model.UpdatedAt.ToString("yyyy-MM-dd HH:mm")</p>
+    <div>
+        <p><strong class="font-medium text-gray-700">Patient:</strong> @(Model.Patient != null ? Model.Patient.FullName : "N/A")</p>
+        <p><strong class="font-medium text-gray-700">Doctor:</strong> @Model.Doctor</p>
+        <p><strong class="font-medium text-gray-700">Department:</strong> @Model.Department</p>
+        <p><strong class="font-medium text-gray-700">Record Details:</strong> @Model.RecordDetails</p>
+        <p><strong class="font-medium text-gray-700">Medical History:</strong> @Model.MedicalHistory</p>
+        <p><strong class="font-medium text-gray-700">Current Medications:</strong> @Model.CurrentMedications</p>
+        <p><strong class="font-medium text-gray-700">Notes:</strong> @Model.Notes</p>
+        <p><strong class="font-medium text-gray-700">Created At:</strong> @Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
+        <p><strong class="font-medium text-gray-700">Updated At:</strong> @Model.UpdatedAt.ToString("yyyy-MM-dd HH:mm")</p>
 
-    <h4 class="mt-4">Lab Records</h4>
-    @if (Model.LabRecords.Any())
-    {
-        <ul>
-            @foreach (var labRecord in Model.LabRecords)
-            {
-                <li>@labRecord.TestType - @labRecord.CreatedAt.ToString("yyyy-MM-dd HH:mm")</li>
-            }
-        </ul>
-    }
-    else
-    {
-        <p>No lab records available for this medical record.</p>
-    }
+        <h2 class="text-xl font-semibold text-gray-800 mb-2">Lab Records</h2>
 
-    <a href="@Url.Action("Index", "MedicalRecord")" class="btn btn-primary mt-4">Back to List</a>
+        @if (Model.LabRecords.Any())
+        {
+            <div class="lab-records-container">
+                @foreach (var labRecord in Model.LabRecords)
+                {
+                    <div class="lab-record-card">
+                        <h4>@labRecord.TestType</h4>
+                        <p>Created At: @labRecord.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
+                        @if (!string.IsNullOrEmpty(labRecord.Notes))
+                        {
+                            <p>Notes: @labRecord.Notes</p>
+                        }
+                    </div>
+                }
+            </div>
+
+        }
+        else
+        {
+            <p>No lab records available for this medical record.</p>
+        }
+        <div class="flex space-x-4 mt-8">
+            <a href="@Url.Action("Labrecord", "MedicalRecord")"
+               class="bg-blue-500 text-white py-1.5 px-3 rounded-md text-sm hover:bg-blue-600 transition duration-300">
+                Create a Laboratory Record for this patient
+            </a>
+            <a href="@Url.Action("Index", "MedicalRecord")" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">
+                Back to List</a>
+        </div>  
+    </div>
+
 </div>

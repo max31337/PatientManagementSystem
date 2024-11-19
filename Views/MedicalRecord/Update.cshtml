@@ -2,63 +2,68 @@
 
 @{
     ViewData["Title"] = "Update Medical Record";
+    ViewData["HideFooter"] = true;
 }
 
-<h2 class="text-2xl font-bold mb-4">Update Medical Record</h2>
-
-<div class="card p-6">
+<div class="card p-6 container mx-auto px-4 py-6">
     <form asp-action="Update" method="post">
         @Html.AntiForgeryToken()
 
         <input type="hidden" asp-for="Id" />
 
+        <h2 class="text-3xl font-bold text-stromboli mb-6">Update Medical Record</h2>
+
         <div class="form-group mb-4">
-            <label for="PatientId">Select Patient</label>
-            <select asp-for="PatientId" class="form-control" asp-items="ViewBag.PatientDropdown">
+            <label for="PatientId" class="block text-gray-700 font-semibold">Select Patient</label>
+            <select asp-for="PatientId" class="form-control mt-2 p-2 border border-gray-300 rounded-md w-full" asp-items="ViewBag.PatientDropdown">
                 <option value="">-- Select a Patient --</option>
             </select>
             @Html.ValidationMessageFor(model => model.PatientId, null, new { @class = "text-danger" })
         </div>
 
         <div class="form-group mb-4">
-            <label for="Doctor">Doctor</label>
+            <label for="Doctor" class="block text-gray-700 font-semibold">Doctor</label>
             <input asp-for="Doctor" class="form-control" />
             @Html.ValidationMessageFor(model => model.Doctor, null, new { @class = "text-danger" })
         </div>
 
         <div class="form-group mb-4">
-            <label for="Department">Department</label>
+            <label for="Department" class="block text-gray-700 font-semibold">Department</label>
             <input asp-for="Department" class="form-control" />
             @Html.ValidationMessageFor(model => model.Department, null, new { @class = "text-danger" })
         </div>
 
         <div class="form-group mb-4">
-            <label for="RecordDetails">Record Details</label>
+            <label for="RecordDetails" class="block text-gray-700 font-semibold">Record Details</label>
             <textarea asp-for="RecordDetails" class="form-control"></textarea>
             @Html.ValidationMessageFor(model => model.RecordDetails, null, new { @class = "text-danger" })
         </div>
 
         <div class="form-group mb-4">
-            <label for="MedicalHistory">Medical History</label>
+            <label for="MedicalHistory" class="block text-gray-700 font-semibold">Medical History</label>
             <textarea asp-for="MedicalHistory" class="form-control"></textarea>
             @Html.ValidationMessageFor(model => model.MedicalHistory, null, new { @class = "text-danger" })
         </div>
 
         <div class="form-group mb-4">
-            <label for="CurrentMedications">Current Medications</label>
+            <label for="CurrentMedications" class="block text-gray-700 font-semibold">Current Medications</label>
             <textarea asp-for="CurrentMedications" class="form-control"></textarea>
             @Html.ValidationMessageFor(model => model.CurrentMedications, null, new { @class = "text-danger" })
         </div>
 
         <div class="form-group mb-4">
-            <label for="Notes">Notes</label>
+            <label for="Notes" class="block text-gray-700 font-semibold">Notes</label>
             <textarea asp-for="Notes" class="form-control"></textarea>
             @Html.ValidationMessageFor(model => model.Notes, null, new { @class = "text-danger" })
         </div>
 
-        <div class="form-group text-right">
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        <div class="flex justify-between mt-6">
+            <button type="submit" class="bg-stromboli text-white font-semibold py-2 px-6 rounded-md hover:bg-stromboli-dark transition duration-300">
+                Save Changes
+            </button>
+            <a asp-controller="Payment" asp-action="Index" class="bg-gray-300 text-gray-700 font-semibold py-2 px-6 rounded-md hover:bg-gray-400 transition duration-300">
+                Cancel
+            </a>
         </div>
     </form>
 </div>

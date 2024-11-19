@@ -1,5 +1,10 @@
 ﻿@model PatientManagementSystem.ViewModels.PaymentViewModel
 
+@{
+    ViewData["Title"] = "Update Patient";
+    ViewData["HideFooter"] = true;
+}
+
 <div class="container mx-auto px-4 py-6">
     <form asp-action="Update" method="post" class="bg-white p-6 rounded-lg shadow-lg">
         <input type="hidden" asp-for="Id" />
