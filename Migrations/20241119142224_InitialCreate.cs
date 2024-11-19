@@ -22,10 +22,11 @@ namespace PatientManagementSystem.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: true),
+                    Gender = table.Column<int>(type: "int", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Weight = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Height = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Weight = table.Column<int>(type: "int", nullable: true),
+                    Height = table.Column<int>(type: "int", nullable: true),
                     BloodPressure = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Occupation = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Employer = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -34,12 +35,12 @@ namespace PatientManagementSystem.Migrations
                     EmergencyPerson = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EmergencyRelationship = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EmergencyContact = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ParentGuardianName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ParentGuardianContact = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PastMedicalHistory = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FamilyHistory = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     InsuranceDetails = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PrimaryCareProvider = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    PrimaryCareProvider = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ParentGuardianName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ParentGuardianContact = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -112,19 +113,23 @@ namespace PatientManagementSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Transactions",
+                name: "Payments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PatientId = table.Column<int>(type: "int", nullable: false),
-                    VisitDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ServicesAvailed = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AmountPaid = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsPaid = table.Column<bool>(type: "bit", nullable: false),
+                    InvoiceNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Transactions", x => x.Id);
+                    table.PrimaryKey("PK_Payments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Transactions_Patients_PatientId",
+                        name: "FK_Payments_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id",
@@ -142,7 +147,8 @@ namespace PatientManagementSystem.Migrations
                     Result = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TestDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    TestDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -153,38 +159,6 @@ namespace PatientManagementSystem.Migrations
                         principalTable: "MedicalRecords",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Payments",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PatientId = table.Column<int>(type: "int", nullable: false),
-                    TransactionId = table.Column<int>(type: "int", nullable: false),
-                    ServicesAvailed = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AmountDue = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    AmountPaid = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsPaid = table.Column<bool>(type: "bit", nullable: false),
-                    InvoiceNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Payments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Payments_Patients_PatientId",
-                        column: x => x.PatientId,
-                        principalTable: "Patients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Payments_Transactions_TransactionId",
-                        column: x => x.TransactionId,
-                        principalTable: "Transactions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -206,16 +180,6 @@ namespace PatientManagementSystem.Migrations
                 name: "IX_Payments_PatientId",
                 table: "Payments",
                 column: "PatientId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Payments_TransactionId",
-                table: "Payments",
-                column: "TransactionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Transactions_PatientId",
-                table: "Transactions",
-                column: "PatientId");
         }
 
         /// <inheritdoc />
@@ -235,9 +199,6 @@ namespace PatientManagementSystem.Migrations
 
             migrationBuilder.DropTable(
                 name: "MedicalRecords");
-
-            migrationBuilder.DropTable(
-                name: "Transactions");
 
             migrationBuilder.DropTable(
                 name: "Patients");

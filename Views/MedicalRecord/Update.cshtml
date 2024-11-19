@@ -1,14 +1,16 @@
 ﻿@model PatientManagementSystem.Models.MedicalRecord
 
 @{
-    ViewData["Title"] = "Add Medical Record";
+    ViewData["Title"] = "Update Medical Record";
 }
 
-<h2 class="text-2xl font-bold mb-4">Add Medical Record</h2>
+<h2 class="text-2xl font-bold mb-4">Update Medical Record</h2>
 
 <div class="card p-6">
-    <form asp-action="Add" method="post">
+    <form asp-action="Update" method="post">
         @Html.AntiForgeryToken()
+
+        <input type="hidden" asp-for="Id" />
 
         <div class="form-group mb-4">
             <label for="PatientId">Select Patient</label>
@@ -55,27 +57,8 @@
         </div>
 
         <div class="form-group text-right">
-            <button type="submit" class="btn btn-primary">Save Medical Record</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
             <a asp-action="Index" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 </div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    <script>
-        function updatePatientInfo() {
-            var selectedPatientId = document.querySelector('select[name="PatientId"]').value;
-
-            if (selectedPatientId) {
-                var selectedOption = document.querySelector('select[name="PatientId"] option[value="' + selectedPatientId + '"]');
-                var patientName = selectedOption.text;
-                document.getElementById("PatientInfo").value = "ID: " + selectedPatientId + " - " + patientName;
-            } else {
-                document.getElementById("PatientInfo").value = "";
-            }
-        }
-    </script>
-}

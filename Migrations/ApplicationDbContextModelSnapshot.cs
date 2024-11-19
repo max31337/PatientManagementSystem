@@ -57,6 +57,9 @@ namespace PatientManagementSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 

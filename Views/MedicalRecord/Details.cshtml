@@ -7,7 +7,7 @@
 <h2 class="text-3xl font-bold mb-4">Medical Record Details</h2>
 
 <div>
-    <h3 class="font-bold mb-2">Patient: @Model.Patient.FullName</h3>
+    <p><strong>Patient:</strong> @(Model.Patient != null ? Model.Patient.FullName : "N/A")</p>
     <p><strong>Doctor:</strong> @Model.Doctor</p>
     <p><strong>Department:</strong> @Model.Department</p>
     <p><strong>Record Details:</strong> @Model.RecordDetails</p>

@@ -1,5 +1,4 @@
-﻿using PatientManagementSystem.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PatientManagementSystem.Models
@@ -23,13 +22,12 @@ namespace PatientManagementSystem.Models
         [Required]
         public required string Department { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow; 
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
         //Navigation Properties
-        [Required]
-        public virtual required Patient Patient { get; set; }
+        public virtual Patient? Patient { get; set; }
         public virtual ICollection<LabRecord> LabRecords { get; set; } = new List<LabRecord>();
     }
 }
