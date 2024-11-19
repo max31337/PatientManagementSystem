@@ -37,7 +37,8 @@
                         <td class="py-2 px-4">@record.RecordDetails</td>
                         <td class="py-2 px-4">@record.Notes</td>
                         <td class="py-2 px-4 border-b">
-                            <a href="@Url.Action("Update", new { id = record.Id })" class="text-stromboli hover:underline">Update</a>
+                            <a href="@Url.Action("Update", new { id = record.Id })" class="text-stromboli hover:underline">Update</a> |
+                            <a href="@Url.Action("Details", new { id = record.Id })" class="text-stromboli hover:underline">Details</a>
                         </td>
                     </tr>
                 }

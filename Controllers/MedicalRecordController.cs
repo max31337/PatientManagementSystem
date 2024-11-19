@@ -167,8 +167,8 @@ public class MedicalRecordController : Controller
     public async Task<IActionResult> Details(int id)
     {
         var medicalRecord = await _context.MedicalRecords
-            .Include(mr => mr.Patient) // Include Patient information
-            .Include(mr => mr.LabRecords) // Include LabRecords if needed
+            .Include(mr => mr.Patient) 
+            .Include(mr => mr.LabRecords) 
             .FirstOrDefaultAsync(mr => mr.Id == id);
 
         if (medicalRecord == null)
@@ -176,9 +176,61 @@ public class MedicalRecordController : Controller
             return NotFound();
         }
 
-        // Pass the `medicalRecord` entity directly to the view
         return View(medicalRecord);
     }
 
 
+
+    // GET: AddLabRecord (pre-populate the form)
+    public IActionResult AddLabRecord(int medicalRecordId)
+    {
+        var model = new LabRecord
+        {
+            MedicalRecordId = medicalRecordId,
+            // Set default values or leave empty if the form requires the user to input them
+            TestType = "",  
+            Result = ""     
+        };
+        return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AddLabRecord(LabRecord labRecord, IFormFile? ImagePath)
+    {
+        // Log ModelState for debugging
+        if (!ModelState.IsValid)
+        {
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine(error.ErrorMessage); 
+            }
+            return View(labRecord);
+        }
+
+        if (ImagePath != null && ImagePath.Length > 0)
+        {
+            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "labrecords");
+
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath); 
+            }
+
+            var filePath = Path.Combine(folderPath, ImagePath.FileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await ImagePath.CopyToAsync(stream);
+            }
+
+            labRecord.ImagePath = "/labrecords/" + ImagePath.FileName; 
+        }
+
+        labRecord.CreatedAt = DateTime.UtcNow;
+
+        _context.LabRecords.Add(labRecord);
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction("Details", "MedicalRecord", new { id = labRecord.MedicalRecordId });
+    }
 }

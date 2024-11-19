@@ -43,7 +43,7 @@
             <p>No lab records available for this medical record.</p>
         }
         <div class="flex space-x-4 mt-8">
-            <a href="@Url.Action("Labrecord", "MedicalRecord")"
+            <a href="@Url.Action("AddLabRecord", "MedicalRecord", new { medicalRecordId = Model.Id })"
                class="bg-blue-500 text-white py-1.5 px-3 rounded-md text-sm hover:bg-blue-600 transition duration-300">
                 Create a Laboratory Record for this patient
             </a>

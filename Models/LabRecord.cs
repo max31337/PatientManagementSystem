@@ -27,7 +27,6 @@ namespace PatientManagementSystem.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation property
-        [Required]
-        public virtual required MedicalRecord MedicalRecord { get; set; } 
+        public virtual MedicalRecord? MedicalRecord { get; set; } 
     }
 }
