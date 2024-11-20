@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2fOtiIUctJKDO0b5suo6HWFr5AP04WVFHTm/8WxPOLA=",
+  "Hash": "RomItGVhpZ3xdDYNekQXmys0RdVD7y7g1PqcBfKRVHU=",
   "Source": "PatientManagementSystem",
   "BasePath": "_content/PatientManagementSystem",
   "Mode": "Default",
@@ -167,6 +167,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\labrecords\\chest-xray(pat9med1).jpg",
+      "SourceId": "PatientManagementSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\",
+      "BasePath": "_content/PatientManagementSystem",
+      "RelativePath": "labrecords/chest-xray(pat9med1).jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\labrecords\\chest-xray(pat9med1).jpg"
     },
     {
       "Identity": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",

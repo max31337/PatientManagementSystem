@@ -13,6 +13,7 @@ namespace PatientManagementSystem.Models
         [Required]
         public required string LastName { get; set; }
         public string FullName => $"{FirstName} {MiddleName} {LastName}";
+
         [Required]
         public required DateTime DateOfBirth { get; set; }
         public int? Age { get; set; }

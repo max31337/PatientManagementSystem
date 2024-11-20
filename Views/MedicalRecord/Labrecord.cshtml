@@ -1,1 +1,57 @@
-﻿
+﻿@model PatientManagementSystem.Models.LabRecord
+
+@{
+    ViewData["Title"] = "Lab Record Details";
+}
+
+<div class="container mx-auto px-4 py-6">
+ 
+    <h3 class="text-xl font-semibold text-gray-800 mb-2">Details of Lab Record</h3>
+    <table class="table table-bordered">
+        <tr>
+            <th>Lab Record ID</th>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <th>Medical Record ID</th>
+            <td>@Model.MedicalRecordId</td>
+        </tr>
+        <tr>
+            <th>Test Type</th>
+            <td>@Model.TestType</td>
+        </tr>
+        <tr>
+            <th>Result</th>
+            <td>@Model.Result</td>
+        </tr>
+        <tr>
+            <th>Notes</th>
+            <td>@(Model.Notes ?? "N/A")</td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td>
+                @if (!string.IsNullOrEmpty(Model.ImagePath))
+                {
+                    <img src="@Url.Content(Model.ImagePath)" alt="Lab Test Image" style="max-width: 300px; height: auto;" />
+                }
+                else
+                {
+                    <span>No Image Available</span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Test Date</th>
+            <td>@Model.TestDate.ToString("yyyy-MM-dd")</td>
+        </tr>
+        <tr>
+            <th>Created At</th>
+            <td>@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>

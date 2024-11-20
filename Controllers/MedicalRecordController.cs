@@ -3,7 +3,6 @@ using PatientManagementSystem.Models;
 using PatientManagementSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using PatientManagementSystem.ViewModels;
 
 public class MedicalRecordController : Controller
 {
@@ -14,10 +13,25 @@ public class MedicalRecordController : Controller
         _context = context;
     }
 
+
+    /*for testing
+    private readonly RabbitMQService _rabbitMQService;
+    public MedicalRecordController(RabbitMQService rabbitMQService)
+    {
+        _rabbitMQService = rabbitMQService;
+    }
+
+
+    public MedicalRecordController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+    */
+
     // List all medical records for a specific patient
     public async Task<IActionResult> Index(int patientId)
     {
-        var records = await _context.MedicalRecords.ToListAsync(); 
+        var records = await _context.MedicalRecords.ToListAsync();
         return View(records);
     }
 
@@ -69,7 +83,7 @@ public class MedicalRecordController : Controller
 
 
     //Lists of records of a patient
-    public async Task<IActionResult> Record (int patientId)
+    public async Task<IActionResult> Record(int patientId)
     {
         var patient = await _context.Patients
             .Where(p => p.Id == patientId)
@@ -167,8 +181,8 @@ public class MedicalRecordController : Controller
     public async Task<IActionResult> Details(int id)
     {
         var medicalRecord = await _context.MedicalRecords
-            .Include(mr => mr.Patient) 
-            .Include(mr => mr.LabRecords) 
+            .Include(mr => mr.Patient)
+            .Include(mr => mr.LabRecords)
             .FirstOrDefaultAsync(mr => mr.Id == id);
 
         if (medicalRecord == null)
@@ -188,8 +202,8 @@ public class MedicalRecordController : Controller
         {
             MedicalRecordId = medicalRecordId,
             // Set default values or leave empty if the form requires the user to input them
-            TestType = "",  
-            Result = ""     
+            TestType = "",
+            Result = ""
         };
         return View(model);
     }
@@ -203,7 +217,7 @@ public class MedicalRecordController : Controller
         {
             foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
             {
-                Console.WriteLine(error.ErrorMessage); 
+                Console.WriteLine(error.ErrorMessage);
             }
             return View(labRecord);
         }
@@ -214,7 +228,7 @@ public class MedicalRecordController : Controller
 
             if (!Directory.Exists(folderPath))
             {
-                Directory.CreateDirectory(folderPath); 
+                Directory.CreateDirectory(folderPath);
             }
 
             var filePath = Path.Combine(folderPath, ImagePath.FileName);
@@ -223,7 +237,7 @@ public class MedicalRecordController : Controller
                 await ImagePath.CopyToAsync(stream);
             }
 
-            labRecord.ImagePath = "/labrecords/" + ImagePath.FileName; 
+            labRecord.ImagePath = "/labrecords/" + ImagePath.FileName;
         }
 
         labRecord.CreatedAt = DateTime.UtcNow;
@@ -232,5 +246,20 @@ public class MedicalRecordController : Controller
         await _context.SaveChangesAsync();
 
         return RedirectToAction("Details", "MedicalRecord", new { id = labRecord.MedicalRecordId });
+    }
+
+    // GET: MedicalRecord/Labrecord/5
+    public async Task<IActionResult> Labrecord(int id)
+    {
+        var labRecord = await _context.LabRecords
+            .Include(mr => mr.MedicalRecord)
+            .FirstOrDefaultAsync(mr => mr.Id == id);
+
+        if (labRecord == null)
+        {
+            return NotFound();
+        }
+
+        return View(labRecord);
     }
 }

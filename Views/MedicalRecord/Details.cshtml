@@ -27,12 +27,14 @@
                 @foreach (var labRecord in Model.LabRecords)
                 {
                     <div class="lab-record-card">
-                        <h4>@labRecord.TestType</h4>
-                        <p>Created At: @labRecord.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
-                        @if (!string.IsNullOrEmpty(labRecord.Notes))
-                        {
-                            <p>Notes: @labRecord.Notes</p>
-                        }
+                        <a href="@Url.Action("Labrecord", "MedicalRecord", new { id = labRecord.Id })">
+                            <h4>@labRecord.TestType</h4>
+                            <p>Created At: @labRecord.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
+                            @if (!string.IsNullOrEmpty(labRecord.Notes))
+                            {
+                                <p>Notes: @labRecord.Notes</p>
+                            }
+                        </a>
                     </div>
                 }
             </div>

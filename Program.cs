@@ -12,7 +12,7 @@ public class Program
 
         // Configure the database context with SQL Server
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(builder.Configuration.GetConnectionString("PMSDb")));
 
         // Add session support
         builder.Services.AddSession(options =>
@@ -21,6 +21,11 @@ public class Program
             options.Cookie.HttpOnly = true;
             options.Cookie.IsEssential = true;
         });
+
+        /*for RabbitMQ
+        builder.Services.AddTransient<RabbitMQService>();
+        builder.Services.AddHostedService<RabbitMQConsumerService>();
+        */
 
         // Register IHttpContextAccessor
         builder.Services.AddHttpContextAccessor();
