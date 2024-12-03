@@ -1,0 +1,32 @@
+﻿@model IEnumerable<PatientManagementSystem.Models.Procedure>
+
+
+
+<div class="container mx-auto px-4 py-6">
+    <h2 class="text-3xl font-bold text-stromboli mb-4">Procedures</h2>
+
+    <table class="table">
+        <thead class="bg-stromboli">
+            <tr class="text-white">
+                <th class="py-3 px-4 text-left">Id</th>
+                <th class="py-3 px-4 text-left">Name</th>
+                <th class="py-3 px-4 text-left">Price</th>
+                <th class="py-3 px-4 text-left">Description</th>
+                <th class="py-3 px-4 text-left">Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var procedure in Model)
+            {
+                <tr>
+                    <td class="py-2 px-4">@procedure.Id</td>
+                    <td class="py-2 px-4">@procedure.ProcedureName</td>
+                    <td class="py-2 px-4">@procedure.ProcedurePrice</td>
+                    <td class="py-2 px-4">@procedure.ProcedureDescription</td>
+                    <td class="py-2 px-4">@procedure.ProcedureNotes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    </div>

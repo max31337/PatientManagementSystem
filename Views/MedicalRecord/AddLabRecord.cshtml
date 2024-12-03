@@ -2,44 +2,56 @@
 
 @{
     ViewData["Title"] = "Add Laboratory Record";
-    var medicalRecordId = Context.Request.Query["medicalRecordId"].ToString(); 
+    var medicalRecordId = Context.Request.Query["medicalRecordId"].ToString();
 }
 
 <div class="container mx-auto px-4 py-6">
-    <h2 class="text-2xl font-bold mb-4">Add Laboratory Record</h2>
+    <!-- Card Container -->
+    <div class="card bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-2xl font-bold mb-4">Add Laboratory Record</h2>
 
-    <form method="post" enctype="multipart/form-data" class="space-y-4">
+        <form method="post" enctype="multipart/form-data" class="space-y-4">
+            <input type="hidden" name="MedicalRecordId" value="@Model.MedicalRecordId" />
 
-        <input type="hidden" name="MedicalRecordId" value="@Model.MedicalRecordId" />
+            <!-- Test Type -->
+            <div class="form-group">
+                <label for="TestType" class="block text-sm font-medium text-gray-700">Test Type</label>
+                <input type="text" id="TestType" name="TestType" value="@Model.TestType"
+                       class="input input-bordered w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required />
+            </div>
 
-        <div class="form-group">
-            <label for="TestType" class=" block text-sm font-medium text-gray-700">Test Type</label>
-            <input type="text" id="TestType" name="TestType" value="@Model.TestType" class="input input-bordered w-full" required />
-        </div>
+            <!-- Result -->
+            <div class="form-group">
+                <label for="Result" class="block text-sm font-medium text-gray-700">Result</label>
+                <input type="text" id="Result" name="Result" value="@Model.Result"
+                       class="input input-bordered w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required />
+            </div>
 
-        <div class="form-group">
-            <label for="Result" class=" block text-sm font-medium text-gray-700">Result</label>
-            <input type="text" id="Result" name="Result" value="@Model.Result" class="input input-bordered w-full" required />
-        </div>
+            <!-- Notes -->
+            <div class="form-group">
+                <label for="Notes" class="block text-sm font-medium text-gray-700">Notes (optional)</label>
+                <textarea id="Notes" name="Notes"
+                          class="textarea textarea-bordered w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" rows="4">@Model.Notes</textarea>
+            </div>
 
-        <div class="form-group">
-            <label for="Notes" class=" block text-sm font-medium text-gray-700">Notes (optional)</label>
-            <textarea id="Notes" name="Notes" class="textarea textarea-bordered w-full" rows="4">@Model.Notes</textarea>
-        </div>
+            <!-- Upload Image -->
+            <div class="form-group">
+                <label for="ImagePath" class="block text-sm font-medium text-gray-700">Upload Image (optional)</label>
+                <input type="file" id="ImagePath" name="ImagePath"
+                       class="file-input file-input-bordered w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+            </div>
 
-        <div class="form-group">
-            <label for="ImagePath" class=" block text-sm font-medium text-gray-700">Upload Image (optional)</label>
-            <input type="file" id="ImagePath" name="ImagePath" class="file-input file-input-bordered w-full" />
-        </div>
-
-        <div class="flex space-x-4 mt-6">
-            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">
-                Add Laboratory Record
-            </button>
-            <a href="@Url.Action("Details", "MedicalRecord", new { id = medicalRecordId })" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition duration-300">
-                Cancel
-            </a>
-        </div>
-    </form>
-
+            <!-- Buttons -->
+            <div class="flex space-x-4 mt-6">
+                <button type="submit"
+                        class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">
+                    Add Laboratory Record
+                </button>
+                <a href="@Url.Action("Details", "MedicalRecord", new { id = medicalRecordId })"
+                   class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition duration-300">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
 </div>

@@ -23,6 +23,8 @@ namespace PatientManagementSystem.ViewModels
         [Required]
         public Gender Gender { get; set; }
         public string? ContactNumber { get; set; }
+        [Required]
+        //public required string Email { get; set; }
         public string? Occupation { get; set; }
         public string? Employer { get; set; }
         public MaritalStatus MaritalStatus { get; set; }

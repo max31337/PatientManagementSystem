@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using PatientManagementSystem.Data;
 
@@ -55,4 +56,13 @@ public class Program
 
         app.Run();
     }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+    Host.CreateDefaultBuilder(args)
+        .ConfigureWebHostDefaults(webBuilder =>
+        {
+            webBuilder.UseStartup<Program>()
+                      .UseUrls("http://192.168.193.172:5000");  
+        });
+
 }

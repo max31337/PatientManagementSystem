@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace PatientManagementSystem.Models
 {
@@ -20,6 +21,9 @@ namespace PatientManagementSystem.Models
         public Gender Gender { get; set; }
         [Required]
         public required string Address { get; set; }
+        /*[Required]
+        public required string Email { get; set; }
+        */
         public string? ContactNumber { get; set; }
 
         public int? Weight { get; set; }

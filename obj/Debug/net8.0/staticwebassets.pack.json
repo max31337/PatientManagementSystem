@@ -13,8 +13,20 @@
       "PackagePath": "staticwebassets\\images\\EMR.png"
     },
     {
+      "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\images\\HeartBeat.png",
+      "PackagePath": "staticwebassets\\images\\HeartBeat.png"
+    },
+    {
       "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\images\\dashboard.png",
       "PackagePath": "staticwebassets\\images\\dashboard.png"
+    },
+    {
+      "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\images\\login_design.png",
+      "PackagePath": "staticwebassets\\images\\login_design.png"
+    },
+    {
+      "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\images\\logo-alphastar.png",
+      "PackagePath": "staticwebassets\\images\\logo-alphastar.png"
     },
     {
       "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\images\\patientpayment.png",
@@ -29,12 +41,24 @@
       "PackagePath": "staticwebassets\\images\\patientreg.png"
     },
     {
+      "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\js\\postcss.config.js",
+      "PackagePath": "staticwebassets\\js\\postcss.config.js"
+    },
+    {
       "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
+      "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\js\\tailwind.config.js",
+      "PackagePath": "staticwebassets\\js\\tailwind.config.js"
+    },
+    {
       "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\labrecords\\chest-xray(pat9med1).jpg",
       "PackagePath": "staticwebassets\\labrecords\\chest-xray(pat9med1).jpg"
+    },
+    {
+      "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\labrecords\\recklesspangolin.jpg",
+      "PackagePath": "staticwebassets\\labrecords\\recklesspangolin.jpg"
     },
     {
       "Id": "C:\\Users\\navar\\source\\repos\\PatientManagementSystem\\wwwroot\\lib\\bootstrap\\LICENSE",

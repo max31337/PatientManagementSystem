@@ -8,11 +8,16 @@
 <div class="flex flex-col items-center">
     <div id="invoice-content" class="card p-6 mx-auto" style="max-width: 800px; font-family: 'Arial', sans-serif;">
         <!-- Company Information -->
-        <div class="text-center mb-6">
-            <h3 class="font-bold text-xl">Your Company Name</h3>
-            <p class="text-sm">Tax Identification Number (TIN): 123-456-789</p>
-            <p class="text-sm">Address: 1234 Company Address, City, State, Zip Code</p>
-            <p class="text-sm">Phone: (123) 456-7890 | Email: info@company.com</p>
+        <div class="text-center mb-6 flex items-center">
+            <!-- Logo Image (Top-left corner) -->
+            <img src="~/images/logo-alphastar.png" alt="Company Logo" class="logo-img mr-4" />
+
+            <div>
+                <h3 class="font-bold text-xl">Alpha Star Laboratory & Multi Specialty Clinic</h3>
+                <p class="text-sm">Tax Identification Number (TIN): 123-456-789</p>
+                <p class="text-sm">Address: C-128 Ground Floor Romarosa Bldg., Luzon Avenue, Matandang Balara), Quezon City, Philippines</p>
+                <p class="text-sm">Phone: (123) 456-7890 | Email: alphastarlabclinic@gmail.com</p>
+            </div>
         </div>
 
         <hr class="my-4">
@@ -80,6 +85,15 @@
 
 <!-- Add custom CSS to hide the button in the PDF -->
 <style>
+    /* Logo Image Styling */
+    .logo-img {
+        width: 50px; /* Adjust the width of the logo */
+        height: auto; /* Maintain aspect ratio */
+        position: relative;
+        top: -10px; /* Adjust the position vertically */
+    }
+
+
     /* Center the invoice content */
     #invoice-content {
         background-color: #fff;

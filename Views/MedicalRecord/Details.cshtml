@@ -6,52 +6,59 @@
 }
 
 <div class="container mx-auto px-4 py-6">
-    <h2 class="text-xl font-semibold text-gray-800 mb-2">Medical Record Details</h2>
+    <!-- Main Card for Medical Record Details -->
+    <div class="card p-6 bg-white shadow-lg rounded-lg mb-8">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Medical Record Details</h2>
 
+        <div>
+            <p><strong class="font-medium text-gray-700">Patient:</strong> @(Model.Patient != null ? Model.Patient.FullName : "N/A")</p>
+            <p><strong class="font-medium text-gray-700">Doctor:</strong> @Model.Doctor</p>
+            <p><strong class="font-medium text-gray-700">Department:</strong> @Model.Department</p>
+            <p><strong class="font-medium text-gray-700">Record Details:</strong> @Model.RecordDetails</p>
+            <p><strong class="font-medium text-gray-700">Medical History:</strong> @Model.MedicalHistory</p>
+            <p><strong class="font-medium text-gray-700">Current Medications:</strong> @Model.CurrentMedications</p>
+            <p><strong class="font-medium text-gray-700">Notes:</strong> @Model.Notes</p>
+            <p><strong class="font-medium text-gray-700">Created At:</strong> @Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
+            <p><strong class="font-medium text-gray-700">Updated At:</strong> @Model.UpdatedAt.ToString("yyyy-MM-dd HH:mm")</p>
+        </div>
+    </div>
+
+    <!-- Lab Records Section -->
     <div>
-        <p><strong class="font-medium text-gray-700">Patient:</strong> @(Model.Patient != null ? Model.Patient.FullName : "N/A")</p>
-        <p><strong class="font-medium text-gray-700">Doctor:</strong> @Model.Doctor</p>
-        <p><strong class="font-medium text-gray-700">Department:</strong> @Model.Department</p>
-        <p><strong class="font-medium text-gray-700">Record Details:</strong> @Model.RecordDetails</p>
-        <p><strong class="font-medium text-gray-700">Medical History:</strong> @Model.MedicalHistory</p>
-        <p><strong class="font-medium text-gray-700">Current Medications:</strong> @Model.CurrentMedications</p>
-        <p><strong class="font-medium text-gray-700">Notes:</strong> @Model.Notes</p>
-        <p><strong class="font-medium text-gray-700">Created At:</strong> @Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
-        <p><strong class="font-medium text-gray-700">Updated At:</strong> @Model.UpdatedAt.ToString("yyyy-MM-dd HH:mm")</p>
-
-        <h2 class="text-xl font-semibold text-gray-800 mb-2">Lab Records</h2>
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Lab Records</h2>
 
         @if (Model.LabRecords.Any())
         {
-            <div class="lab-records-container">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach (var labRecord in Model.LabRecords)
                 {
-                    <div class="lab-record-card">
+                    <div class="lab-record-card bg-white shadow-md rounded-lg p-4">
                         <a href="@Url.Action("Labrecord", "MedicalRecord", new { id = labRecord.Id })">
-                            <h4>@labRecord.TestType</h4>
-                            <p>Created At: @labRecord.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
+                            <h4 class="font-semibold text-lg text-gray-800 mb-2">@labRecord.TestType</h4>
+                            <p class="text-sm text-gray-600">Created At: @labRecord.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
                             @if (!string.IsNullOrEmpty(labRecord.Notes))
                             {
-                                <p>Notes: @labRecord.Notes</p>
+                                <p class="text-sm text-gray-600">Notes: @labRecord.Notes</p>
                             }
                         </a>
                     </div>
                 }
             </div>
-
         }
         else
         {
             <p>No lab records available for this medical record.</p>
         }
-        <div class="flex space-x-4 mt-8">
-            <a href="@Url.Action("AddLabRecord", "MedicalRecord", new { medicalRecordId = Model.Id })"
-               class="bg-blue-500 text-white py-1.5 px-3 rounded-md text-sm hover:bg-blue-600 transition duration-300">
-                Create a Laboratory Record for this patient
-            </a>
-            <a href="@Url.Action("Index", "MedicalRecord")" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">
-                Back to List</a>
-        </div>  
     </div>
 
+    <!-- Action Buttons -->
+    <div class="flex space-x-4 mt-8">
+        <a href="@Url.Action("AddLabRecord", "MedicalRecord", new { medicalRecordId = Model.Id })"
+           class="bg-blue-500 text-white py-1.5 px-3 rounded-md text-sm hover:bg-blue-600 transition duration-300">
+            Create a Laboratory Record for this patient
+        </a>
+        <a href="@Url.Action("Index", "MedicalRecord")" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">
+            Back to List
+        </a>
+    </div>
 </div>

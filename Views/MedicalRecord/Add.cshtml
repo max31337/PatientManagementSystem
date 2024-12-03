@@ -5,62 +5,78 @@
     ViewData["HideFooter"] = true;
 }
 
-<h2 class="text-2xl font-bold mb-4">Add Medical Record</h2>
+<div class="container mx-auto px-4 py-6">
+    <!-- Card -->
+    <div class="card bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-2xl font-bold mb-4">Add Medical Record</h2>
 
-<div class="card p-6">
-    <form asp-action="Add" method="post">
-        @Html.AntiForgeryToken()
+        <form asp-action="Add" method="post" class="space-y-4">
+            @Html.AntiForgeryToken()
 
-        <div class="form-group mb-4">
-            <label for="PatientId">Select Patient</label>
-            <select asp-for="PatientId" class="form-control" asp-items="ViewBag.PatientDropdown">
-                <option value="">-- Select a Patient --</option>
-            </select>
-            @Html.ValidationMessageFor(model => model.PatientId, null, new { @class = "text-danger" })
-        </div>
+            <!-- Select Patient -->
+            <div class="form-group">
+                <label for="PatientId" class="block text-sm font-medium text-gray-700">Select Patient</label>
+                <select asp-for="PatientId" class="form-control border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" asp-items="ViewBag.PatientDropdown">
+                    <option value="">-- Select a Patient --</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.PatientId, null, new { @class = "text-red-500 text-sm" })
+            </div>
 
-        <div class="form-group mb-4">
-            <label for="Doctor">Doctor</label>
-            <input asp-for="Doctor" class="form-control" />
-            @Html.ValidationMessageFor(model => model.Doctor, null, new { @class = "text-danger" })
-        </div>
+            <!-- Doctor -->
+            <div class="form-group">
+                <label for="Doctor" class="block text-sm font-medium text-gray-700">Doctor</label>
+                <input asp-for="Doctor" class="form-control border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                @Html.ValidationMessageFor(model => model.Doctor, null, new { @class = "text-red-500 text-sm" })
+            </div>
 
-        <div class="form-group mb-4">
-            <label for="Department">Department</label>
-            <input asp-for="Department" class="form-control" />
-            @Html.ValidationMessageFor(model => model.Department, null, new { @class = "text-danger" })
-        </div>
+            <!-- Department -->
+            <div class="form-group">
+                <label for="Department" class="block text-sm font-medium text-gray-700">Department</label>
+                <input asp-for="Department" class="form-control border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                @Html.ValidationMessageFor(model => model.Department, null, new { @class = "text-red-500 text-sm" })
+            </div>
 
-        <div class="form-group mb-4">
-            <label for="RecordDetails">Record Details</label>
-            <textarea asp-for="RecordDetails" class="form-control"></textarea>
-            @Html.ValidationMessageFor(model => model.RecordDetails, null, new { @class = "text-danger" })
-        </div>
+            <!-- Record Details -->
+            <div class="form-group">
+                <label for="RecordDetails" class="block text-sm font-medium text-gray-700">Record Details</label>
+                <textarea asp-for="RecordDetails" class="textarea textarea-bordered w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+                @Html.ValidationMessageFor(model => model.RecordDetails, null, new { @class = "text-red-500 text-sm" })
+            </div>
 
-        <div class="form-group mb-4">
-            <label for="MedicalHistory">Medical History</label>
-            <textarea asp-for="MedicalHistory" class="form-control"></textarea>
-            @Html.ValidationMessageFor(model => model.MedicalHistory, null, new { @class = "text-danger" })
-        </div>
+            <!-- Medical History -->
+            <div class="form-group">
+                <label for="MedicalHistory" class="block text-sm font-medium text-gray-700">Medical History</label>
+                <textarea asp-for="MedicalHistory" class="textarea textarea-bordered w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+                @Html.ValidationMessageFor(model => model.MedicalHistory, null, new { @class = "text-red-500 text-sm" })
+            </div>
 
-        <div class="form-group mb-4">
-            <label for="CurrentMedications">Current Medications</label>
-            <textarea asp-for="CurrentMedications" class="form-control"></textarea>
-            @Html.ValidationMessageFor(model => model.CurrentMedications, null, new { @class = "text-danger" })
-        </div>
+            <!-- Current Medications -->
+            <div class="form-group">
+                <label for="CurrentMedications" class="block text-sm font-medium text-gray-700">Current Medications</label>
+                <textarea asp-for="CurrentMedications" class="textarea textarea-bordered w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+                @Html.ValidationMessageFor(model => model.CurrentMedications, null, new { @class = "text-red-500 text-sm" })
+            </div>
 
-        <div class="form-group mb-4">
-            <label for="Notes">Notes</label>
-            <textarea asp-for="Notes" class="form-control"></textarea>
-            @Html.ValidationMessageFor(model => model.Notes, null, new { @class = "text-danger" })
-        </div>
+            <!-- Notes -->
+            <div class="form-group">
+                <label for="Notes" class="block text-sm font-medium text-gray-700">Notes</label>
+                <textarea asp-for="Notes" class="textarea textarea-bordered w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+                @Html.ValidationMessageFor(model => model.Notes, null, new { @class = "text-red-500 text-sm" })
+            </div>
 
-        <div class="form-group text-right">
-            <button type="submit" class="btn btn-primary">Save Medical Record</button>
-            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-        </div>
-    </form>
+            <!-- Buttons -->
+            <div class="flex justify-end space-x-4 mt-4">
+                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">
+                    Save Medical Record
+                </button>
+                <a asp-action="Index" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition duration-300">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
 </div>
+
 
 @section Scripts {
     @{
