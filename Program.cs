@@ -23,11 +23,6 @@ public class Program
             options.Cookie.IsEssential = true;
         });
 
-        /*for RabbitMQ
-        builder.Services.AddTransient<RabbitMQService>();
-        builder.Services.AddHostedService<RabbitMQConsumerService>();
-        */
-
         // Register IHttpContextAccessor
         builder.Services.AddHttpContextAccessor();
 
